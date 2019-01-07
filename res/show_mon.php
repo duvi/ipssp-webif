@@ -2,7 +2,6 @@
 
 require_once('db.php');
 
-$rows = array();
 $message = "";
 
     if ($_POST && isset($_POST['mon']))
@@ -27,6 +26,7 @@ $message = "";
         $message .= "Signals not received.\n";
     }
 
+    $rows = array();
     while ($row = mysqli_fetch_array($result))
         {
         $rows[] = $row;
