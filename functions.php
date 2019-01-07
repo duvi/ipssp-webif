@@ -4,7 +4,7 @@ function get_stations()
     {
     include('res/config.php');
     global $info_message;
-    $rows = "";
+    $rows = array();
 
     $connection = mysqli_connect($db_host,$db_user,$db_pass);
     if (!$connection)
