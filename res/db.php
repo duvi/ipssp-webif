@@ -1,7 +1,7 @@
 <?php
 
 function db_select($sql) {
-    require_once('config.php');
+    include('config.php');
 
     $connection = mysqli_connect($db_host,$db_user,$db_pass);
     if (!$connection)
