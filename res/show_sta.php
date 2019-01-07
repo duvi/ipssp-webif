@@ -1,8 +1,7 @@
 <?php
 
-require_once('config.php');
+require_once('db.php');
 
-$rows = array();
 $message = "";
 
     if ($_POST && isset($_POST['sta']))
@@ -14,26 +13,14 @@ $message = "";
         $param = "183da22eeaec";
         }
 
-    $connection = mysqli_connect($db_host,$db_user,$db_pass);
-    if (!$connection)
-    {
-        die("Database connection failed: " . mysqli_error($connection));
-    }
-
-    $db_select = mysqli_select_db($connection,$db_name);
-    if (!$db_select)
-    {
-        die("Database selection failed: " . mysqli_error($connection));
-    }
     $sql = "SELECT sta_id, channel
             FROM station_list
             WHERE sta_id='" . $param . "'";
 
-    $result = mysqli_query($connection,$sql);
+    $result = db_select($sql);
     if (!$result)
     {
         $message .= "Station not received.\n";
-        die("Database query failed: " . mysqli_error($connection));
     }
 
     if ($row = mysqli_fetch_array($result))
@@ -46,21 +33,17 @@ $message = "";
                             ON station_data.mon_id = monitor_data.mon_id
                             WHERE station_data.sta_id = '" . $param . "'";
 
-        $result = mysqli_query($connection,$sql);
-        if (!$result)
+        $result2 = db_select($sql);
+
+        while ($row2 = mysqli_fetch_array($result2))
             {
-            die("Database query failed: " . mysqli_error($connection));
+            $message .= "MONITOR: " . $row2['ip'] . " SIGNAL: -" . $row2['signal'] . " dBm  TIME: " . $row2['time_rcv'] . " \n";
             }
-        while ($row = mysqli_fetch_array($result))
-            {
-            $message .= "MONITOR: " . $row['ip'] . " SIGNAL: -" . $row['signal'] . " dBm  TIME: " . $row['time_rcv'] . " \n";
-            }
+        mysqli_free_result($result2);
         }
 
     mysqli_free_result($result);
-    mysqli_close($connection);
 
     echo json_encode(array('message'=>nl2br($message)));
 
 ?>
-
