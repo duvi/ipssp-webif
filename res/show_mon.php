@@ -20,7 +20,6 @@ $message = "";
             WHERE position_data.mon_id='" . $param . "'";
 
     $result = db_select($sql);
-
     if (!$result)
     {
         $message .= "Signals not received.\n";
@@ -38,5 +37,5 @@ $message = "";
 
 //    echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
     echo json_encode(array('result'=>$rows));
-?>
 
+?>

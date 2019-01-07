@@ -8,7 +8,6 @@ $message = "";
             FROM position_list";
 
     $result = db_select($sql);
-
     if (!$result)
         {
         $message .= "Positions not received.\n";
