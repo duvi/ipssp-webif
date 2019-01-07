@@ -1,28 +1,17 @@
 <?php
 
-require_once('config.php');
+require_once('db.php');
 
 $message = "";
-
-    $connection = mysqli_connect($db_host,$db_user,$db_pass);
-    if (!$connection)
-        {
-        die("Database connection failed: " . mysqli_error($connection));
-        }
-
-    $db_select = mysqli_select_db($connection,$db_name);
-    if (!$db_select)
-        {
-        die("Database selection failed: " . mysqli_error($connection));
-        }
 
     $sql = "SELECT pos_id, x, y, time_rec
             FROM position_list";
 
-    $result = mysqli_query($connection,$sql);
+    $result = db_select($sql);
+
     if (!$result)
         {
-        die("Database query failed: " . mysqli_error($connection));
+        $message .= "Positions not received.\n";
         }
 
     while ($row = mysqli_fetch_array($result))
@@ -36,11 +25,8 @@ $message = "";
                 WHERE position_data.pos_id = '" . $row['pos_id'] . "'
                 ORDER BY position_data.mean";
 
-        $result2 = mysqli_query($connection,$sql);
-        if (!$result2)
-            {
-            die("Database query failed: " . mysqli_error($connection));
-            }
+        $result2 = db_select($sql);
+
         while ($row2 = mysqli_fetch_array($result2))
             {
             $message .= "MON: " . $row2['ip'] . " SIG: -" . $row2['signal'] . " dBm   MEAN: -" . $row2['mean'] . " dBm  DEV: " . $row2['std_dev'] . " \n";
@@ -49,9 +35,7 @@ $message = "";
         }
 
     mysqli_free_result($result);
-    mysqli_close($connection);
 
     echo json_encode(array('message'=>nl2br($message)));
 
 ?>
-
