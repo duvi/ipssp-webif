@@ -355,14 +355,14 @@ function get_mac() {
 // $arpTable = `$location`;
  $arpTable = `/sbin/arp -n`;
  // Split the output so every line is an entry of the $arpSplitted array
- $arpSplitted = split("\n",$arpTable);
+ $arpSplitted = explode("\n",$arpTable);
  // Get the remote ip address (the ip address of the client, the browser)
  $remoteIp = $_SERVER['REMOTE_ADDR'];
  // Cicle the array to find the match with the remote ip address
  foreach ($arpSplitted as $value) {
  // Split every arp line, this is done in case the format of the arp
  // command output is a bit different than expected
- $valueSplitted = split(" ",$value);
+ $valueSplitted = explode(" ",$value);
  foreach ($valueSplitted as $spLine) {
  if (preg_match("/$remoteIp/",$spLine)) {
  $ipFound = true;
