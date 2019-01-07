@@ -6,30 +6,30 @@ function get_stations()
     global $info_message;
     $rows = "";
 
-    $connection = mysql_connect($db_host,$db_user,$db_pass);
+    $connection = mysqli_connect($db_host,$db_user,$db_pass);
     if (!$connection)
         {
-        die("Database connection failed: " . mysql_error());
+        die("Database connection failed: " . mysqli_error($connection));
         }
 
-    $db_select = mysql_select_db($db_name,$connection);
+    $db_select = mysqli_select_db($connection,$db_name);
     if (!$db_select)
         {
-        die("Database selection failed: " . mysql_error());
+        die("Database selection failed: " . mysqli_error($connection));
         }
 
     $sql = "SELECT sta_id, record, r, g, b
             FROM station_list";
 
-    $result = mysql_query($sql, $connection);
+    $result = mysqli_query($connection,$sql);
     if (!$result)
         {
         $info_message .= "Station list not received.\n";
-        die("Database query failed: " . mysql_error());
+        die("Database query failed: " . mysqli_error($connection));
         }
 
     $i = 0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = mysqli_fetch_array($result))
         {
         $rows[$i]["mac"] = $row["sta_id"];
         $rows[$i]["rec"] = $row["record"];
@@ -39,8 +39,8 @@ function get_stations()
         $i++;
         }
 
-    mysql_free_result($result);
-    mysql_close($connection);
+    mysqli_free_result($result);
+    mysqli_close($connection);
 
     return $rows;
     }
@@ -51,31 +51,31 @@ function get_monitors()
     global $info_message;
     $rows = array();
 
-    $connection = mysql_connect($db_host,$db_user,$db_pass);
+    $connection = mysqli_connect($db_host,$db_user,$db_pass);
     if (!$connection)
         {
-        die("Database connection failed: " . mysql_error());
+        die("Database connection failed: " . mysqli_error($connection));
         }
 
-    $db_select = mysql_select_db($db_name,$connection);
+    $db_select = mysqli_select_db($connection,$db_name);
     if (!$db_select)
         {
-        die("Database selection failed: " . mysql_error());
+        die("Database selection failed: " . mysqli_error($connection));
         }
 
     $sql = "SELECT mon_id, ip, x, y
             FROM monitor_list
             ORDER BY ip";
 
-    $result = mysql_query($sql, $connection);
+    $result = mysqli_query($connection,$sql);
     if (!$result)
         {
         $info_message .= "Monitor list not received.\n";
-        die("Database query failed: " . mysql_error());
+        die("Database query failed: " . mysqli_error($connection));
         }
 
     $i = 0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = mysqli_fetch_array($result))
         {
         $rows[$i]["mac"] = $row["mon_id"];
         $rows[$i]["ip"] = $row["ip"];
@@ -84,8 +84,8 @@ function get_monitors()
         $i++;
         }
 
-    mysql_free_result($result);
-    mysql_close($connection);
+    mysqli_free_result($result);
+    mysqli_close($connection);
 
     return $rows;
     }
@@ -96,30 +96,30 @@ function get_positions()
     global $info_message;
     $rows = array();
 
-    $connection = mysql_connect($db_host,$db_user,$db_pass);
+    $connection = mysqli_connect($db_host,$db_user,$db_pass);
     if (!$connection)
         {
-        die("Database connection failed: " . mysql_error());
+        die("Database connection failed: " . mysqli_error($connection));
         }
 
-    $db_select = mysql_select_db($db_name,$connection);
+    $db_select = mysqli_select_db($connection,$db_name);
     if (!$db_select)
         {
-        die("Database selection failed: " . mysql_error());
+        die("Database selection failed: " . mysqli_error($connection));
         }
 
     $sql = "SELECT pos_id, x, y
             FROM position_list";
 
-    $result = mysql_query($sql, $connection);
+    $result = mysqli_query($connection,$sql);
     if (!$result)
         {
         $info_message .= "Monitor list not received.\n";
-        die("Database query failed: " . mysql_error());
+        die("Database query failed: " . mysqli_error($connection));
         }
 
     $i = 0;
-    while ($row = mysql_fetch_array($result))
+    while ($row = mysqli_fetch_array($result))
         {
         $rows[$i]["name"] = $row["pos_id"];
         $rows[$i]["x"] = $row["x"];
@@ -127,8 +127,8 @@ function get_positions()
         $i++;
         }
 
-    mysql_free_result($result);
-    mysql_close($connection);
+    mysqli_free_result($result);
+    mysqli_close($connection);
 
     return $rows;
     }

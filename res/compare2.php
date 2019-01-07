@@ -34,7 +34,7 @@
         global $pos_x;
         global $pos_y;
 
-        if ($row = mysql_fetch_array($input))
+        if ($row = mysqli_fetch_array($input))
             {
             $pos_x = $row["x"];
             $pos_y = $row["y"];
@@ -59,7 +59,7 @@
 //            $message .= "area: " . $result[$i]["x"] . "," .  $result[$i]["y"] . "\n";
             $result[$i]["n"] = 0;
             $result[$i]["calc"] = 0;
-            while ($row = mysql_fetch_array($input))
+            while ($row = mysqli_fetch_array($input))
                 {
                 if (distance($result[$i]["x"], $result[$i]["y"], $row["x"], $row["y"]) < $max_dist)
                     {
@@ -75,7 +75,7 @@
                 $pos_y = $result[$i]["y"];
                 }
 //            $message .= "calc: " . $result[$i]["calc"]/$result[$i]["n"] . "\n";
-            mysql_data_seek($input,0);
+            mysqli_data_seek($input,0);
             $i++;
             }
         }
@@ -117,8 +117,8 @@
         $sql = "UPDATE station_list
                 SET x=" . $pos_x . ", y=" . $pos_y . ", lim=" . $limit . "
                 WHERE sta_id = '" . $param . "'";
-        $result = mysql_query($sql, $connection);
-        mysql_free_result($result);
+        $result = mysqli_query($connection,$sql);
+        mysqli_free_result($result);
 
         }
 
@@ -126,16 +126,16 @@
         {
         $param = str_replace(":", "", $mac);
 
-        $connection = mysql_connect($db_host,$db_user,$db_pass);
+        $connection = mysqli_connect($db_host,$db_user,$db_pass);
         if (!$connection)
             {
-            die("Database connection failed: " . mysql_error());
+            die("Database connection failed: " . mysqli_error($connection));
             }
 
-        $db_select = mysql_select_db($db_name,$connection);
+        $db_select = mysqli_select_db($connection,$db_name);
         if (!$db_select)
             {
-            die("Database selection failed: " . mysql_error());
+            die("Database selection failed: " . mysqli_error($connection));
             }
 
         switch ($command)
@@ -151,13 +151,13 @@
                                 " . $timeout_sql . "
                                 ORDER BY time_rcv DESC
                                 ";
-                $result = mysql_query($sql_defmon, $connection);
+                $result = mysqli_query($connection,$sql_defmon);
                 if (!$result)
                     {
                     $message .= "Default monitor not received.\n";
-                    die("Database query failed: " . mysql_error());
+                    die("Database query failed: " . mysqli_error($connection));
                     }
-                else if ($row = mysql_fetch_array($result))
+                else if ($row = mysqli_fetch_array($result))
                     {
                     $def_mon_signal = $row["signal"];
                     $def_mon_id = $row["mon_id"];
@@ -229,11 +229,11 @@
 
         if ($sql)
             {
-            $result = mysql_query($sql, $connection);
+            $result = mysqli_query($connection,$sql);
             if (!$result)
                 {
                 $message .= "Places not received.\n";
-                die("Database query failed: " . mysql_error());
+                die("Database query failed: " . mysqli_error($connection));
                 }
             else
                 {
@@ -244,20 +244,20 @@
             $sql = "SELECT r, g, b, x, y, lim
                     FROM station_list
                     WHERE sta_id = '" . $param . "'";
-            $result = mysql_query($sql, $connection);
+            $result = mysqli_query($connection,$sql);
             if (!$result)
                 {
                 $message .= "Colors / ex-position not received.\n";
-                die("Database query failed: " . mysql_error());
+                die("Database query failed: " . mysqli_error($connection));
                 }
             else
                 {
-                $sta_r = mysql_result($result, 0, 0);
-                $sta_g = mysql_result($result, 0, 1);
-                $sta_b = mysql_result($result, 0, 2);
-                $pre_x = mysql_result($result, 0, 3);
-                $pre_y = mysql_result($result, 0, 4);
-                $pre_limit = mysql_result($result, 0, 5);
+                $sta_r = mysqli_result($result, 0, 0);
+                $sta_g = mysqli_result($result, 0, 1);
+                $sta_b = mysqli_result($result, 0, 2);
+                $pre_x = mysqli_result($result, 0, 3);
+                $pre_y = mysqli_result($result, 0, 4);
+                $pre_limit = mysqli_result($result, 0, 5);
                 $message .= "Colors: " . $sta_r . " " . $sta_g . " " . $sta_b . "\n";
                 $message .= "Ex-position: " . $pre_x . " " . $pre_y . " Limit: " . $pre_limit . "\n";
                 $message .= "Alg-position: " . $pos_x . " " . $pos_y;
@@ -265,13 +265,13 @@
 
             calc_pre_pos();
             $message .= "Final-position: " . $pos_x . " " . $pos_y . " Limit: " . $limit . "\n";
-            mysql_free_result($result);
+            mysqli_free_result($result);
             }
         else
             {
             $message .= "Wrong algorhythm specified!\n";
             }
-        mysql_close($connection);
+        mysqli_close($connection);
         }
     else
         {

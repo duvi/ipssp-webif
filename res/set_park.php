@@ -9,22 +9,22 @@ $message = "";
         $park_id = $_POST['park_id'];
         $free = $_POST['free'];
 
-        $connection = mysql_connect($db_host,$db_user,$db_pass);
+        $connection = mysqli_connect($db_host,$db_user,$db_pass);
         if (!$connection)
             {
-            die("Database connection failed: " . mysql_error());
+            die("Database connection failed: " . mysqli_error($connection));
             }
 
-        $db_select = mysql_select_db($db_name,$connection);
+        $db_select = mysqli_select_db($connection,$db_name);
         if (!$db_select)
             {
-            die("Database selection failed: " . mysql_error());
+            die("Database selection failed: " . mysqli_error($connection));
             }
 
         $sql = "REPLACE INTO park_data(park_id,free)
                 VALUES(" . $park_id . "," . $free . ")";
 
-        $result = mysql_query($sql, $connection);
+        $result = mysqli_query($connection,$sql);
         if (!$result)
             {
             $message .= "Something went wrong with the database.\n";
@@ -46,8 +46,8 @@ $message = "";
                 }
             $message .= "Please wait, refreshing...\n";
             }
-        mysql_free_result($result);
-        mysql_close($connection);
+        mysqli_free_result($result);
+        mysqli_close($connection);
         }
     else
         {

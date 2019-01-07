@@ -4,28 +4,28 @@ require_once('config.php');
 
 $message = "";
 
-    $connection = mysql_connect($db_host,$db_user,$db_pass);
+    $connection = mysqli_connect($db_host,$db_user,$db_pass);
     if (!$connection)
         {
-        die("Database connection failed: " . mysql_error());
+        die("Database connection failed: " . mysqli_error($connection));
         }
 
-    $db_select = mysql_select_db($db_name,$connection);
+    $db_select = mysqli_select_db($connection,$db_name);
     if (!$db_select)
         {
-        die("Database selection failed: " . mysql_error());
+        die("Database selection failed: " . mysqli_error($connection));
         }
 
     $sql = "SELECT pos_id, x, y, time_rec
             FROM position_list";
 
-    $result = mysql_query($sql, $connection);
+    $result = mysqli_query($connection,$sql);
     if (!$result)
         {
-        die("Database query failed: " . mysql_error());
+        die("Database query failed: " . mysqli_error($connection));
         }
 
-    while ($row = mysql_fetch_array($result))
+    while ($row = mysqli_fetch_array($result))
         {
         $message .= "POSITION: " . $row['pos_id'] . " [" . $row['x'] . "," . $row['y'] . "] TIME: " . $row['time_rec'] . " \n";
 
@@ -36,20 +36,20 @@ $message = "";
                 WHERE position_data.pos_id = '" . $row['pos_id'] . "'
                 ORDER BY position_data.mean";
 
-        $result2 = mysql_query($sql, $connection);
+        $result2 = mysqli_query($connection,$sql);
         if (!$result2)
             {
-            die("Database query failed: " . mysql_error());
+            die("Database query failed: " . mysqli_error($connection));
             }
-        while ($row2 = mysql_fetch_array($result2))
+        while ($row2 = mysqli_fetch_array($result2))
             {
             $message .= "MON: " . $row2['ip'] . " SIG: -" . $row2['signal'] . " dBm   MEAN: -" . $row2['mean'] . " dBm  DEV: " . $row2['std_dev'] . " \n";
             }
-        mysql_free_result($result2);
+        mysqli_free_result($result2);
         }
 
-    mysql_free_result($result);
-    mysql_close($connection);
+    mysqli_free_result($result);
+    mysqli_close($connection);
 
     echo json_encode(array('message'=>nl2br($message)));
 
