@@ -1,34 +1,22 @@
 <?php
 
+include('res/db.php');
+
 function get_stations()
     {
-    include('res/config.php');
     global $info_message;
-    $rows = array();
-
-    $connection = mysqli_connect($db_host,$db_user,$db_pass);
-    if (!$connection)
-        {
-        die("Database connection failed: " . mysqli_error($connection));
-        }
-
-    $db_select = mysqli_select_db($connection,$db_name);
-    if (!$db_select)
-        {
-        die("Database selection failed: " . mysqli_error($connection));
-        }
 
     $sql = "SELECT sta_id, record, r, g, b
             FROM station_list";
 
-    $result = mysqli_query($connection,$sql);
+    $result = db_select($sql);
     if (!$result)
         {
         $info_message .= "Station list not received.\n";
-        die("Database query failed: " . mysqli_error($connection));
         }
 
     $i = 0;
+    $rows = array();
     while ($row = mysqli_fetch_array($result))
         {
         $rows[$i]["mac"] = $row["sta_id"];
@@ -40,41 +28,26 @@ function get_stations()
         }
 
     mysqli_free_result($result);
-    mysqli_close($connection);
 
     return $rows;
     }
 
 function get_monitors()
     {
-    include('res/config.php');
     global $info_message;
-    $rows = array();
-
-    $connection = mysqli_connect($db_host,$db_user,$db_pass);
-    if (!$connection)
-        {
-        die("Database connection failed: " . mysqli_error($connection));
-        }
-
-    $db_select = mysqli_select_db($connection,$db_name);
-    if (!$db_select)
-        {
-        die("Database selection failed: " . mysqli_error($connection));
-        }
 
     $sql = "SELECT mon_id, ip, x, y
             FROM monitor_list
             ORDER BY ip";
 
-    $result = mysqli_query($connection,$sql);
+    $result = db_select($sql);
     if (!$result)
         {
         $info_message .= "Monitor list not received.\n";
-        die("Database query failed: " . mysqli_error($connection));
         }
 
     $i = 0;
+    $rows = array();
     while ($row = mysqli_fetch_array($result))
         {
         $rows[$i]["mac"] = $row["mon_id"];
@@ -85,40 +58,25 @@ function get_monitors()
         }
 
     mysqli_free_result($result);
-    mysqli_close($connection);
 
     return $rows;
     }
 
 function get_positions()
     {
-    include('res/config.php');
     global $info_message;
-    $rows = array();
-
-    $connection = mysqli_connect($db_host,$db_user,$db_pass);
-    if (!$connection)
-        {
-        die("Database connection failed: " . mysqli_error($connection));
-        }
-
-    $db_select = mysqli_select_db($connection,$db_name);
-    if (!$db_select)
-        {
-        die("Database selection failed: " . mysqli_error($connection));
-        }
 
     $sql = "SELECT pos_id, x, y
             FROM position_list";
 
-    $result = mysqli_query($connection,$sql);
+    $result = db_select($sql);
     if (!$result)
         {
         $info_message .= "Monitor list not received.\n";
-        die("Database query failed: " . mysqli_error($connection));
         }
 
     $i = 0;
+    $rows = array();
     while ($row = mysqli_fetch_array($result))
         {
         $rows[$i]["name"] = $row["pos_id"];
@@ -128,7 +86,6 @@ function get_positions()
         }
 
     mysqli_free_result($result);
-    mysqli_close($connection);
 
     return $rows;
     }
