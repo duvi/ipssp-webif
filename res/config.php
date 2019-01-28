@@ -4,8 +4,8 @@ $server_ip = '127.0.0.1';
 $out_port = 5950;
 $in_port = rand(10000, 65530);
 $timeout = 2;
-$mapfile = "img/terkep_Gyozo_kivagott.png";
-//$mapfile = "img/pontok.png";
+//$mapfile = "img/terkep_Gyozo_kivagott.png";
+$mapfile = "img/alaprajz_resize.png";
 
 
 //Adatbazis parameterek
