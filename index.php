@@ -201,7 +201,7 @@ require_once('functions.php');
                         echo ('
                                 </div>
                                 <div class="main">
-                                    <div style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                    <div class="position-relative" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                                         <img src="img/rotpunkt.png" id="blink_img" onLoad="blink()" style="position:relative;z-index:2;left:' . ($pos_x-5) . 'px;top:' . ($pos_y-5) . 'px;">
                                     </div>
                                     <div id=record_message class="info">'
@@ -261,7 +261,7 @@ require_once('functions.php');
                         echo ('
                             </div>
                             <div class="main">
-                                <div id="monitors" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                <div id="monitors" class="position-relative" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                             ');
                         foreach ($monitors as $monitor)
                             {
@@ -328,7 +328,7 @@ require_once('functions.php');
                         echo ('
                             </div>
                             <div class="main" >
-                            <div style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                            <div id="positions" class="position-relative" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                         ');
                         foreach ($positions as $position)
                             {
@@ -355,7 +355,7 @@ require_once('functions.php');
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="park_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                        <div id="park_map" class="position-relative" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                         </div>
                         <div id=park_message class="info">
                         </div>
@@ -431,7 +431,7 @@ require_once('functions.php');
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="locate_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                        <div id="locate_map" class="position-relative" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                             <canvas id="locate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
                             <div id="locate_punkt"> </div>
                         </div>
@@ -467,7 +467,7 @@ require_once('functions.php');
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="navigate_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                        <div id="navigate_map" class="position-relative" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                             <canvas id="navigate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
                             <img src="img/rotpunkt.png" id="compare_punkt" style="position:absolute;z-index:2;left:0px;top:0px;visibility:hidden;">
                             <img src="img/rotpunkt.png" id="navigate_punkt" style="position:absolute;visibility:hidden;z-index:2;">

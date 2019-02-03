@@ -41,8 +41,7 @@ body {
 }
 
 .main {
-    left: 220px;
-    position: relative;
+    margin-left: 220px;
 }
 
 #info {
