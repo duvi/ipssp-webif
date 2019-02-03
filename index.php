@@ -26,118 +26,100 @@ $pos_y = "";
 
 require_once('functions.php');
 
-    if ($imagesize = getimagesize("$mapfile"))
-    {
+if ($imagesize = getimagesize("$mapfile")) {
     $info_message .= "Map image loaded.\n x=" . $imagesize[0] . "px y=" . $imagesize[1] . "px\n";
-    }
-    else
-    {
+}
+else {
     $info_message .= "Map image not found!\n";
-    }
+}
 
-    if ($_POST && isset($_POST['command']))
-    {
+if ($_POST && isset($_POST['command'])) {
     $command = $_POST['command'];
-    if (isset($_POST['sta']))
-        {
+    if (isset($_POST['sta'])) {
         $param = $_POST['sta'];
-        }
-    if (isset($_POST['pos']))
-        {
+    }
+    if (isset($_POST['pos'])) {
         $param = $_POST['pos'];
         $posname = $_POST['pos'];
-        }
-    if (isset($_POST['posnum']))
-        {
+    }
+    if (isset($_POST['posnum'])) {
         $param = $_POST['posnum'];
-        }
-    if (isset($_POST['form_x']) && isset($_POST['form_y']))
-        {
+    }
+    if (isset($_POST['form_x']) && isset($_POST['form_y'])) {
         $param = $_POST['form_x'] . "," . $_POST['form_y'];
-        }
-    if (isset($_POST['mapname']))
-        {
+    }
+    if (isset($_POST['mapname'])) {
         $param = $_POST['mapname'];
-        }
-        if (isset($_POST['macname']))
-        {
+    }
+    if (isset($_POST['macname'])) {
         $param .= " " . $_POST['macname'];
         $mac = $_POST['macname'];
-        }
     }
+}
 
-    if ($command)
-    {
-    if ($socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP))
-    {
+if ($command) {
+    if ($socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP)) {
         $full_command = $command . " " . $param;
         socket_bind($socket, $server_ip, $in_port);
         socket_sendto($socket, $full_command, strlen($full_command), 0, $server_ip, $out_port);
         socket_set_block($socket);
-        socket_set_option($socket,
-                          SOL_SOCKET,
-                          SO_RCVTIMEO,
-                          array("sec"=>$timeout,"usec"=>0));
-
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec"=>$timeout,"usec"=>0));
         socket_recvfrom($socket, $message_in, 65535, 0, $clientIP, $clientPort);
         socket_set_nonblock($socket);
         socket_close($socket);
 
         list($command_in, $param_in) = sscanf($message_in, "%s %s");
-        switch ($command_in)
-        {
-        case "done":
-            $message_file = fopen($logfile, "r");
-            $message .= fread($message_file, filesize($logfile));
-            fclose($message_file);
-            break;
-        case "message":
-            $message .= substr($message_in, strlen($command_in));
-            break;
-        case "coords":
-            list($pos_x, $pos_y) = sscanf($param_in, "%i,%i");
-            $message_file = fopen($logfile, "r");
-            $message .= fread($message_file, filesize($logfile));
-            fclose($message_file);
-            $message .= $pos_x . "," . $pos_y;
-            break;
-        case "":
-            $info_message .= "Nothing received.\n Check if server is running!\n";
+        switch ($command_in) {
+            case "done":
+                $message_file = fopen($logfile, "r");
+                $message .= fread($message_file, filesize($logfile));
+                fclose($message_file);
+                break;
+            case "message":
+                $message .= substr($message_in, strlen($command_in));
+                break;
+            case "coords":
+                list($pos_x, $pos_y) = sscanf($param_in, "%i,%i");
+                $message_file = fopen($logfile, "r");
+                $message .= fread($message_file, filesize($logfile));
+                fclose($message_file);
+                $message .= $pos_x . "," . $pos_y;
+                break;
+            case "":
+                $info_message .= "Nothing received.\n Check if server is running!\n";
         }
     }
-    else
-    {
+    else {
         $info_message .= "Can't create socket\n";
     }
-    }
-    else
-    {
+}
+else {
     $info_message .= "No command run!\n";
-    }
+}
 
-    $mac = get_mac();
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $info_message .= "Your MAC: " . $mac . "\n";
-    $info_message .= "Your IP: " . $ip . "\n";
-    $posnum = get_num_pos();
-    $mapname = get_map_name();
-    $stations = get_stations();
-    $stations_checkbox = print_stations_checkbox($stations);
-    if (isset($_POST['sta']))
-    {
+$mac = get_mac();
+$ip = $_SERVER['REMOTE_ADDR'];
+$info_message .= "Your MAC: " . $mac . "\n";
+$info_message .= "Your IP: " . $ip . "\n";
+$posnum = get_num_pos();
+$mapname = get_map_name();
+$stations = get_stations();
+$stations_checkbox = print_stations_checkbox($stations);
+
+if (isset($_POST['sta'])) {
     $stations_select = print_stations($stations, $_POST['sta'], 0);
     $stations_select_rec = print_stations($stations, $_POST['sta'], 1);
-    }
-    else
-    {
+}
+else {
     $stations_select = print_stations($stations, $mac, 0);
     $stations_select_rec = print_stations($stations, $mac, 1);
-    }
-    $positions = get_positions();
-    $positions_select = print_positions($positions, $posname);
-    $monitors = get_monitors();
-    $sessions = get_session($mapname);
-    $maps = get_maps();
+}
+
+$positions = get_positions();
+$positions_select = print_positions($positions, $posname);
+$monitors = get_monitors();
+$sessions = get_session($mapname);
+$maps = get_maps();
 
 ?>
 
