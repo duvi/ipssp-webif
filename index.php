@@ -162,59 +162,6 @@ require_once('functions.php');
         </script>
 
     </head>
-<style>
-<!--
-.dragme{position:relative;}
--->
-</style>
-<script language="JavaScript1.2">
-<!--
-
-var ie=document.all;
-var nn6=document.getElementById&&!document.all;
-
-var isdrag=false;
-var x,y;
-var dobj;
-
-function movemouse(e)
-{
-  if (isdrag)
-  {
-    dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
-    dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
-    return false;
-  }
-}
-
-function selectmouse(e) 
-{
-  var fobj       = nn6 ? e.target : event.srcElement;
-  var topelement = nn6 ? "HTML" : "BODY";
-
-  while (fobj.tagName != topelement && (fobj.className.indexOf("dragme") == -1))
-  {
-    fobj = nn6 ? fobj.parentNode : fobj.parentElement;
-  }
-
-  if (fobj.className.indexOf("dragme") != -1)
-  {
-    isdrag = true;
-    dobj = fobj;
-    tx = parseInt(dobj.style.left+0);
-    ty = parseInt(dobj.style.top+0);
-    x = nn6 ? e.clientX : event.clientX;
-    y = nn6 ? e.clientY : event.clientY;
-    document.onmousemove=movemouse;
-    return false;
-  }
-}
-
-document.onmousedown=selectmouse;
-document.onmouseup=new Function("isdrag=false");
-
-//-->
-</script>
 
     <body>
 
@@ -254,7 +201,7 @@ document.onmouseup=new Function("isdrag=false");
                         echo ('
                                 </div>
                                 <div class="main">
-                                    <div style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class="dragme">
+                                    <div style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                                         <img src="img/rotpunkt.png" id="blink_img" onLoad="blink()" style="position:relative;z-index:2;left:' . ($pos_x-5) . 'px;top:' . ($pos_y-5) . 'px;">
                                     </div>
                                     <div id=record_message class="info">'
@@ -314,7 +261,7 @@ document.onmouseup=new Function("isdrag=false");
                         echo ('
                             </div>
                             <div class="main">
-                                <div id="monitors" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class=" dragme">
+                                <div id="monitors" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                             ');
                         foreach ($monitors as $monitor)
                             {
@@ -381,7 +328,7 @@ document.onmouseup=new Function("isdrag=false");
                         echo ('
                             </div>
                             <div class="main" >
-                            <div style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class="dragme">
+                            <div style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                         ');
                         foreach ($positions as $position)
                             {
@@ -408,7 +355,7 @@ document.onmouseup=new Function("isdrag=false");
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="park_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class="dragme">
+                        <div id="park_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                         </div>
                         <div id=park_message class="info">
                         </div>
@@ -452,7 +399,7 @@ document.onmouseup=new Function("isdrag=false");
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="record_map_div" onclick="point_it(event)" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class="dragme">
+                        <div id="record_map_div" onclick="point_it(event)" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                         <img src="img/rotpunkt.png" id="cross" style="position:relative;visibility:hidden;z-index:2;">
                         </div>
                         <div id=record_message class="info">
@@ -484,7 +431,7 @@ document.onmouseup=new Function("isdrag=false");
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="locate_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class="dragme">
+                        <div id="locate_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                             <canvas id="locate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
                             <div id="locate_punkt"> </div>
                         </div>
@@ -520,7 +467,7 @@ document.onmouseup=new Function("isdrag=false");
                     echo ('
                         </div>
                         <div class="main">
-                        <div id="navigate_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;" class="dragme">
+                        <div id="navigate_map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                             <canvas id="navigate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
                             <img src="img/rotpunkt.png" id="compare_punkt" style="position:absolute;z-index:2;left:0px;top:0px;visibility:hidden;">
                             <img src="img/rotpunkt.png" id="navigate_punkt" style="position:absolute;visibility:hidden;z-index:2;">
