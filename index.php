@@ -226,7 +226,7 @@ document.onmouseup=new Function("isdrag=false");
                     <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Info</a>
                     <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monitor</a>
                     <a class="nav-item nav-link" id="nav-pos-tab" data-toggle="tab" href="#nav-pos" role="tab" aria-controls="nav-pos" aria-selected="false">Position</a>
-                    <a class="nav-item nav-link" id="nav-park-tab" data-toggle="tab" href="#nav-park" role="tab" aria-controls="nav-park" aria-selected="false">Park</a>
+                    <a class="nav-item nav-link disabled" id="nav-park-tab" data-toggle="tab" href="#nav-park" role="tab" aria-controls="nav-park" aria-selected="false">Park</a>
                     <a class="nav-item nav-link" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-rec" aria-selected="false">Record</a>
                     <a class="nav-item nav-link" id="nav-loc-tab" data-toggle="tab" href="#nav-loc" role="tab" aria-controls="nav-loc" aria-selected="false">Locate</a>
                     <a class="nav-item nav-link" id="nav-nav-tab" data-toggle="tab" href="#nav-nav" role="tab" aria-controls="nav-nav" aria-selected="false">Navigate</a>
@@ -527,7 +527,7 @@ document.onmouseup=new Function("isdrag=false");
                             <div id="nav_punkt"> </div>
                         </div>
                         <script>
-                            drawpark();
+                            //drawpark();
                         </script>
                         <div id=compare_message class="info">
                         </div>
