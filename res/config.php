@@ -6,7 +6,7 @@ $in_port = rand(10000, 65530);
 $timeout = 2;
 //$mapfile = "img/terkep_Gyozo_kivagott.png";
 $mapfile = "img/alaprajz_resize.png";
-
+$logfile = "logs/position.log";
 
 //Adatbazis parameterek
 $db_host = "localhost";

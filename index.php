@@ -87,8 +87,8 @@ require_once('functions.php');
         switch ($command_in)
         {
         case "done":
-            $message_file = fopen("position.log", "r");
-            $message .= fread($message_file, filesize("position.log"));
+            $message_file = fopen($logfile, "r");
+            $message .= fread($message_file, filesize($logfile));
             fclose($message_file);
             break;
         case "message":
@@ -96,8 +96,8 @@ require_once('functions.php');
             break;
         case "coords":
             list($pos_x, $pos_y) = sscanf($param_in, "%i,%i");
-            $message_file = fopen("position.log", "r");
-            $message .= fread($message_file, filesize("position.log"));
+            $message_file = fopen($logfile, "r");
+            $message .= fread($message_file, filesize($logfile));
             fclose($message_file);
             $message .= $pos_x . "," . $pos_y;
             break;
