@@ -200,10 +200,10 @@ $maps = get_maps();
                                 <div class="left">
                                     <div>
                                         <form target="_parent" method="post">
-                                        Show all station info: 
-                                        <input type="button" onClick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; show_all();" value="Show"/> </br>
-                                        Show all position info: 
-                                        <input type="button" onClick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; list_pos();" value="Show"/> </br>
+                                            Show all station info:
+                                            <input type="button" onClick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; show_all();" value="Show"/> </br>
+                                            Show all position info:
+                                            <input type="button" onClick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; list_pos();" value="Show"/> </br>
                                         </form>
                                     </div>
                         ');
@@ -212,8 +212,8 @@ $maps = get_maps();
                                     <div>
                                     Show station info:</br>
                                         <form name="info_form" target="_parent" method="post">
-                                ' . $stations_select . '
-                                        <input type="button" onClick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; show_sta();" value="Show"/>
+                                            ' . $stations_select . '
+                                            <input type="button" onClick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; show_sta();" value="Show"/>
                                         </form>
                                     </div>
                             ');
@@ -222,247 +222,249 @@ $maps = get_maps();
                         echo ('
                                 </div>
                                 <div class="main">
-                                    <div id=info_message class="info">
+                                    <div id=info_message class="info">'
+                                        . nl2br($message) . '
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-mon" role="tabpanel" aria-labelledby="nav-mon-tab">
-                            <h2>Monitor</h2>
-                            <div class="left">
-                                <div>
-                                    <form name=monitor>
+                            <div class="tab-pane fade" id="nav-mon" role="tabpanel" aria-labelledby="nav-mon-tab">
+                                <h2>Monitor</h2>
+                                <div class="left">
+                                    <div>
+                                        <form name=monitor>
                         ');
                         foreach ($monitors as $monitor) {
                             echo ('<input type="button" onClick="document.getElementById(\'mon_message\').innerHTML = \'Loading...\'; show_mon(\'' . $monitor["mac"] . '\'); document.getElementById(\'mon_message\').innerHTML = \'\';" value="' . $monitor["ip"] . '">');
                         }
                         echo ('
-                                    </form>
-                                </div>
+                                        </form>
+                                    </div>
                         ');
                         print_info($info_message);
                         echo ('
-                            </div>
-                            <div class="main">
-                                <div id="monitors" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
-                            ');
+                                </div>
+                                <div class="main">
+                                    <div id="monitors" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                        ');
                         foreach ($monitors as $monitor)
                             {
                             echo ('<img src="img/rotpunkt.png" id="' . $monitor["mac"] . '" title="' . $monitor["ip"] . '" onClick="document.getElementById(\'mon_message\').innerHTML = \'Loading...\'; show_mon(\'' . $monitor["mac"] . '\'); document.getElementById(\'mon_message\').innerHTML = \'\';" style="position:absolute;float:none;z-index:3;opacity:0.4;cursor:pointer;left:' . ($monitor["x"]-5) . 'px;top:' . ($monitor["y"]-5) . 'px;"> ');
                             }
                         echo ('
-                                    <div id="mon_punkt"> </div>
+                                        <div id="mon_punkt"> </div>
+                                    </div>
+                                    <div id=mon_message class="info">'
+                                        . nl2br($message) . '
+                                    </div>
                                 </div>
-                            <div id=mon_message class="info">
                             </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
-                            <h2>Position</h2>
-                            <div class="left">
-                            <div>
-                                <form target="_parent" method="post">
-                                Load positions<br/>
-                                <input type="hidden" name="command" value="load_sql" />
-                                Session: 
-                                <select name="mapname" onChange="document.getElementById(\'load_pos_ok\').style.visibility = \'visible\'; get_folders();" id="map_select">
-                        ' . $sessions . '
-                                </select>
-                                </br>
-                                Station:
-                                <select name="macname" id="map_select2">
-                                </select>
-                                </br>
-                                <input type="submit" value="OK" id="load_pos_ok" style="visibility:hidden;" /> </br>
-                                </br>
-                                </form>
-                            </div>
-                    <!--        <div>
-                                <form target="_parent" method="post">
-                                Clear positions
-                                <input type="hidden" name="command" value="clear_map" />
-                                <input type="submit" value="OK" /> </br>
-                                </form>
-                                <form target="_parent" method="post">
-                                <select name="mapname" >
-                        ' . $maps . '
-                                </select>
-                                <input type="submit" name="command" value="load_map" /> </br>
-                                </form>
-                                <form target="_parent" method="post">
-                                <input type="text" name="mapname" /> </br>
-                                <input type="submit" name="command" value="save_map" /> </br>
-                                </form>
-                            </div>
-                    --> ');
-                        if ($positions_select)
-                        {
-                        echo ('
-                            <div>
-                                <form name="pos_form" target="_parent" method="post">
-                                <input type="text" name="pos" size="4" />
-                                </br>
-                    <!--            <input type="submit" name="command" value="del_pos" /> </br>
-                    -->         </form>
-                            </div>
+                            <div class="tab-pane fade" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
+                                <h2>Position</h2>
+                                <div class="left">
+                                    <div>
+                                        <form target="_parent" method="post">
+                                            Load positions<br/>
+                                            <input type="hidden" name="command" value="load_sql" />
+                                            Session:
+                                            <select name="mapname" onChange="document.getElementById(\'load_pos_ok\').style.visibility = \'visible\'; get_folders();" id="map_select">
+                                            ' . $sessions . '
+                                            </select>
+                                            </br>
+                                            Station:
+                                            <select name="macname" id="map_select2">
+                                            </select>
+                                            </br>
+                                            <input type="submit" value="OK" id="load_pos_ok" style="visibility:hidden;" /> </br>
+                                            </br>
+                                        </form>
+                                    </div>
+                        <!--        <div>
+                                        <form target="_parent" method="post">
+                                            Clear positions
+                                            <input type="hidden" name="command" value="clear_map" />
+                                            <input type="submit" value="OK" /> </br>
+                                        </form>
+                                        <form target="_parent" method="post">
+                                            <select name="mapname" >
+                                            ' . $maps . '
+                                            </select>
+                                            <input type="submit" name="command" value="load_map" /> </br>
+                                            </form>
+                                            <form target="_parent" method="post">
+                                            <input type="text" name="mapname" /> </br>
+                                            <input type="submit" name="command" value="save_map" /> </br>
+                                        </form>
+                                    </div> -->
                         ');
+                        if ($positions_select)  {
+                            echo ('
+                                    <div>
+                                        <form name="pos_form" target="_parent" method="post">
+                                        <input type="text" name="pos" size="4" />
+                                        </br>
+                            <!--            <input type="submit" name="command" value="del_pos" /> </br>
+                            -->         </form>
+                                    </div>
+                            ');
                         }
                         print_info($info_message);
                         echo ('
-                            </div>
-                            <div class="main" >
-                            <div id="positions" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                </div>
+                                <div class="main" >
+                                    <div id="positions" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                         ');
-                        foreach ($positions as $position)
-                            {
+                        foreach ($positions as $position) {
                             echo ('<img src="img/rotpunkt.png" title="' . $position["name"] . '" onClick="document.getElementById(\'pos_message\').innerHTML = \'Loading...\'; show_pos(' . $position["name"] . ');" style="position:absolute;float:none;z-index:2;opacity:0.8;cursor:pointer;left:' . ($position["x"]-5) . 'px;top:' . ($position["y"]-5) . 'px;"> ');
-                            }
+                        }
                         echo ('
+                                    </div>
+                                    <div id=pos_message class="info"> '
+                                    . (nl2br($message)) . '
+                                    </div>
+                                </div>
                             </div>
-                            <div id=pos_message class="info"> '
-                            . (nl2br($message)) . '
+                            <div class="tab-pane fade" id="nav-park" role="tabpanel" aria-labelledby="nav-park-tab">
+                                <h2>Park</h2>
+                                <div class="left">
+                                    <div>
+                                    Click on a parking place to change its status!<br/><br/>
+                                    </div>
+                        ');
+                        print_info($info_message);
+                        echo ('
+                                </div>
+                                <div class="main">
+                                    <div id="park_map" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                    </div>
+                                    <div id=park_message class="info">'
+                                        . nl2br($message) . '
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
+                                <h2>Record</h2>
+                                <div class="left">
+                                    This module is not working at the moment!<br/><br/>
+                                    <div>
+                                        Select recording stations<br/>
+                                        0: recorded<br/>
+                                        1: not recorded<br/><br/>
+                                        <form target="_parent" method="post">
+                        ');
+                        echo $stations_select_rec;
+                        echo ('
+                                            </br>
+                                            <input type="submit" name="command" value="record_sta" /> </br>
+                                        </form>
+                                        <form target="_parent" method="post">
+                                            <input type="hidden" name="command" value="set_num_pos" />
+                                            <input type="text" name="posnum" value="' . $posnum . '" />
+                                            <input type="submit" value="Set next position" /> </br>
+                                        </form>
+                                        <form target="_parent" method="post">
+                                            <input type="hidden" name="command" value="set_session" />
+                                            <input type="text" name="mapname" value="' . $mapname . '"/>
+                                            <input type="submit" value="Set record session folder" /> </br>
+                                        </form>
+                                        <form name="pointform" target="_parent" method="post">
+                                            <input type="hidden" name="command" value="rec_single 1" />
+                                            x = <input type="text" name="form_x" size="4" />
+                                            y = <input type="text" name="form_y" size="4" />
+                                            <input type="submit" id="rec_button" style="visibility:hidden;" value="Record" /> </br>
+                                            <p id="rec_text" style="visibility:visible;" >Set your position on the map to record!</p>
+                                        </form>
+                                    </div>
+                        ');
+                        print_info($info_message);
+                        echo ('
+                                </div>
+                                <div class="main">
+                                    <div id="record_map_div" class="map" onclick="point_it(event)" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                        <img src="img/rotpunkt.png" id="cross" style="position:relative;visibility:hidden;z-index:2;">
+                                    </div>
+                                    <div id=record_message class="info">'
+                                        . nl2br($message) . '
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-loc" role="tabpanel" aria-labelledby="nav-loc-tab">
+                                <h2>Locate</h2>
+                                <div class="left">
+                                    <div>
+                                        <form name="locate_form" target="_parent" method="post">
+                        ');
+                        echo $stations_checkbox;
+                        echo ('
+                                            </br>
+                                            <label><input type="radio" name="command" value="compare" />compare</label></br>
+                                            <label><input type="radio" name="command" value="comp_diff" CHECKED/>comp_diff</label></br>
+                                            <label><input type="radio" name="command" value="comp_norm" />comp_norm</label></br>
+                                            <label><input type="radio" name="command" value="comp_dist" />comp_dist</label></br>
+                                            <label><input type="radio" name="command" value="comp_felezo" />comp_felezo</label></br>
+                                            <label><input type="radio" name="command" value="comp_knn" />comp_knn</label></br>
+                                            </br>
+                                            <input type="button" id="locate_start" value="start" onClick="document.getElementById(\'locate_start\').style.visibility = \'hidden\'; document.getElementById(\'locate_stop\').style.visibility = \'visible\'; locate();">
+                                            <input type="button" id="locate_stop" value="stop" onClick="document.getElementById(\'locate_start\').style.visibility = \'visible\'; document.getElementById(\'locate_stop\').style.visibility = \'hidden\'; clearCanvas(\'locate_canvas\'); clearTimeout(locate_timer); " style="visibility:hidden;" >
+                                        </form>
+                                    </div>
+                        ');
+                        print_info($info_message);
+                        echo ('
+                                </div>
+                                <div class="main">
+                                    <div id="locate_map" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                        <canvas id="locate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
+                                        <div id="locate_punkt"> </div>
+                                    </div>
+                                    <div id=locate_message class="info">'
+                                        . nl2br($message) . '
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-nav" role="tabpanel" aria-labelledby="nav-nav-tab">
+                                <h2>Navigate</h2>
+                                <div class="left">
+                                    <div>
+                                        <form name="compare_form" target="_parent" method="post">
+                        ');
+                        echo $stations_select;
+                        echo ('
+                                            </br>
+                                            <label><input type="radio" name="command" value="compare" />compare</label></br>
+                                            <label><input type="radio" name="command" value="comp_diff" CHECKED/>comp_diff</label></br>
+                                            <label><input type="radio" name="command" value="comp_norm" />comp_norm</label></br>
+                                            <label><input type="radio" name="command" value="comp_dist" />comp_dist</label></br>
+                                            <label><input type="radio" name="command" value="comp_felezo" />comp_felezo</label></br>
+                                            <label><input type="radio" name="command" value="comp_knn" />comp_knn</label></br>
+                                            </br>
+                                            <input type="button" id="navigate_start" value="start" onClick="document.getElementById(\'navigate_start\').style.visibility = \'hidden\'; document.getElementById(\'navigate_stop\').style.visibility = \'visible\'; compare();">
+                                            <input type="button" id="navigate_stop" value="stop" onClick="document.getElementById(\'navigate_start\').style.visibility = \'visible\'; document.getElementById(\'navigate_stop\').style.visibility = \'hidden\'; clearCanvas(\'navigate_canvas\'); clearTimeout(compare_timer);" style="visibility:hidden;" >
+                                        </form>
+                                        <form name="navigate_form" target="_parent" method="post">
+                                            <p id="navigate_text" style="visibility:visible;" >Set your destination on the map!</p>
+                                        </form>
+                                    </div>
+                        ');
+                        print_info($info_message);
+                        echo ('
+                                </div>
+                                <div class="main">
+                                    <div id="navigate_map" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
+                                        <canvas id="navigate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
+                                        <img src="img/rotpunkt.png" id="compare_punkt" style="position:absolute;z-index:2;left:0px;top:0px;visibility:hidden;">
+                                        <img src="img/rotpunkt.png" id="navigate_punkt" style="position:absolute;visibility:hidden;z-index:2;">
+                                        <div id="nav_punkt"> </div>
+                                    </div>
+                                    <script>
+                                        //drawpark();
+                                    </script>
+                                    <div id=compare_message class="info">'
+                                        . nl2br($message) . '
+                                    </div>
+                                </div>
                             </div>
                         ');
                     }
-                    echo ('
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-park" role="tabpanel" aria-labelledby="nav-park-tab">
-                        <h2>Park</h2>
-                        <div class="left">
-                        <div>
-                        Click on a parking place to change its status!<br/><br/>
-                        </div>
-                    ');
-                    print_info($info_message);
-                    echo ('
-                        </div>
-                        <div class="main">
-                        <div id="park_map" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
-                        </div>
-                        <div id=park_message class="info">
-                        </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
-                        <h2>Record</h2>
-                        <div class="left">
-                        This module is not working at the moment!<br/><br/>
-                        <div>
-                            Select recording stations<br/>
-                            0: recorded<br/>
-                            1: not recorded<br/><br/>
-                            <form target="_parent" method="post">
-                    ');
-                    echo $stations_select_rec;
-                    echo ('
-                            </br>
-                            <input type="submit" name="command" value="record_sta" /> </br>
-                            </form>
-                            <form target="_parent" method="post">
-                            <input type="hidden" name="command" value="set_num_pos" />
-                            <input type="text" name="posnum" value="' . $posnum . '" />
-                            <input type="submit" value="Set next position" /> </br>
-                            </form>
-                            <form target="_parent" method="post">
-                            <input type="hidden" name="command" value="set_session" />
-                            <input type="text" name="mapname" value="' . $mapname . '"/>
-                            <input type="submit" value="Set record session folder" /> </br>
-                            </form>
-                            <form name="pointform" target="_parent" method="post">
-                            <input type="hidden" name="command" value="rec_single 1" />
-                            x = <input type="text" name="form_x" size="4" />
-                            y = <input type="text" name="form_y" size="4" />
-                            <input type="submit" id="rec_button" style="visibility:hidden;" value="Record" /> </br>
-                            <p id="rec_text" style="visibility:visible;" >Set your position on the map to record!</p>
-                            </form>
-                        </div>
-                    ');
-                    print_info($info_message);
-                    echo ('
-                        </div>
-                        <div class="main">
-                        <div id="record_map_div" class="map" onclick="point_it(event)" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
-                        <img src="img/rotpunkt.png" id="cross" style="position:relative;visibility:hidden;z-index:2;">
-                        </div>
-                        <div id=record_message class="info">
-                        </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-loc" role="tabpanel" aria-labelledby="nav-loc-tab">
-                        <h2>Locate</h2>
-                        <div class="left">
-                        <div>
-                            <form name="locate_form" target="_parent" method="post">
-                    ');
-                    echo $stations_checkbox;
-                    echo ('
-                            </br>
-                            <label><input type="radio" name="command" value="compare" />compare</label></br>
-                            <label><input type="radio" name="command" value="comp_diff" CHECKED/>comp_diff</label></br>
-                            <label><input type="radio" name="command" value="comp_norm" />comp_norm</label></br>
-                            <label><input type="radio" name="command" value="comp_dist" />comp_dist</label></br>
-                            <label><input type="radio" name="command" value="comp_felezo" />comp_felezo</label></br>
-                            <label><input type="radio" name="command" value="comp_knn" />comp_knn</label></br>
-                            </br>
-                            <input type="button" id="locate_start" value="start" onClick="document.getElementById(\'locate_start\').style.visibility = \'hidden\'; document.getElementById(\'locate_stop\').style.visibility = \'visible\'; locate();">
-                            <input type="button" id="locate_stop" value="stop" onClick="document.getElementById(\'locate_start\').style.visibility = \'visible\'; document.getElementById(\'locate_stop\').style.visibility = \'hidden\'; clearCanvas(\'locate_canvas\'); clearTimeout(locate_timer); " style="visibility:hidden;" >
-                            </form>
-                        </div>
-                    ');
-                    print_info($info_message);
-                    echo ('
-                        </div>
-                        <div class="main">
-                        <div id="locate_map" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
-                            <canvas id="locate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
-                            <div id="locate_punkt"> </div>
-                        </div>
-                        <div id=locate_message class="info">
-                        </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-nav" role="tabpanel" aria-labelledby="nav-nav-tab">
-                        <h2>Navigate</h2>
-                        <div class="left">
-                        <div>
-                            <form name="compare_form" target="_parent" method="post">
-                    ');
-                    echo $stations_select;
-                    echo ('
-                            </br>
-                            <label><input type="radio" name="command" value="compare" />compare</label></br>
-                            <label><input type="radio" name="command" value="comp_diff" CHECKED/>comp_diff</label></br>
-                            <label><input type="radio" name="command" value="comp_norm" />comp_norm</label></br>
-                            <label><input type="radio" name="command" value="comp_dist" />comp_dist</label></br>
-                            <label><input type="radio" name="command" value="comp_felezo" />comp_felezo</label></br>
-                            <label><input type="radio" name="command" value="comp_knn" />comp_knn</label></br>
-                            </br>
-                            <input type="button" id="navigate_start" value="start" onClick="document.getElementById(\'navigate_start\').style.visibility = \'hidden\'; document.getElementById(\'navigate_stop\').style.visibility = \'visible\'; compare();">
-                            <input type="button" id="navigate_stop" value="stop" onClick="document.getElementById(\'navigate_start\').style.visibility = \'visible\'; document.getElementById(\'navigate_stop\').style.visibility = \'hidden\'; clearCanvas(\'navigate_canvas\'); clearTimeout(compare_timer);" style="visibility:hidden;" >
-                            </form>
-                            <form name="navigate_form" target="_parent" method="post">
-                            <p id="navigate_text" style="visibility:visible;" >Set your destination on the map!</p>
-                            </form>
-                        </div>
-                    ');
-                    print_info($info_message);
-                    echo ('
-                        </div>
-                        <div class="main">
-                        <div id="navigate_map" class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
-                            <canvas id="navigate_canvas" width="' . $imagesize[0] . '" height="' . $imagesize[1] . '" style="position: absolute;"></canvas>
-                            <img src="img/rotpunkt.png" id="compare_punkt" style="position:absolute;z-index:2;left:0px;top:0px;visibility:hidden;">
-                            <img src="img/rotpunkt.png" id="navigate_punkt" style="position:absolute;visibility:hidden;z-index:2;">
-                            <div id="nav_punkt"> </div>
-                        </div>
-                        <script>
-                            //drawpark();
-                        </script>
-                        <div id=compare_message class="info">
-                        </div>
-                        </div>
-                    </div>
-                    ');
                     ?>
                 </div>
             </div>
