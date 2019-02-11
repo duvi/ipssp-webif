@@ -17,6 +17,15 @@
         	setTimeout("blink();", 500);
          }
 
+    function seconds() {
+        var e = document.getElementById('seconds');
+        var value = parseInt(e.textContent) + 1;
+        console.log(value);
+        e.innerHTML = value;
+
+        setTimeout("seconds();", 1000);
+    }
+
     function navigate(pos_x, pos_y)
         {
         document.getElementById("navigate_punkt").style.left = (pos_x-5);

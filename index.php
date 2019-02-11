@@ -177,6 +177,7 @@ $maps = get_maps();
                             <div class="tab-pane fade show active" id="nav-record" role="tabpanel" aria-labelledby="nav-record-tab">
                                 <h2>Record</h2>
                                 <div class="left">
+                                    <span id="seconds">0</span> masodperc telt el.
                                     <div>
                                         <form target="_parent" method="post" >
                                         <input type="hidden" name="command" value="rec_single 0" />
@@ -190,7 +191,7 @@ $maps = get_maps();
                                 </div>
                                 <div class="main">
                                     <div class="map" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
-                                        <img src="img/rotpunkt.png" id="blink_img" onLoad="blink()" style="position:relative;z-index:2;left:' . ($pos_x-5) . 'px;top:' . ($pos_y-5) . 'px;">
+                                        <img src="img/rotpunkt.png" id="blink_img" onLoad="blink(); seconds();" style="position:relative;z-index:2;left:' . ($pos_x-5) . 'px;top:' . ($pos_y-5) . 'px;">
                                     </div>
                                     <div id=record_message class="info">'
                                         . nl2br($message) . '
