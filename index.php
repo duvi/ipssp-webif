@@ -3,6 +3,7 @@
 require_once('res/config.php');
 
 $command = "";
+$tab = "";
 $command_in = "";
 $param = "";
 $message = "";
@@ -55,6 +56,10 @@ if ($_POST && isset($_POST['command'])) {
         $param .= " " . $_POST['macname'];
         $mac = $_POST['macname'];
     }
+}
+
+if ($_POST && isset($_POST['tab'])) {
+    $tab = $_POST['tab'];
 }
 
 if ($command) {
@@ -152,11 +157,11 @@ $maps = get_maps();
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <span class="navbar-brand mb-0 h1">iPark Positioning System</span>
                     <?php if (!file_exists("recording")) : ?>
-                    <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Info</a>
+                    <a class="nav-item nav-link <?php echo (($tab == '') ? ' show active' : ''); ?>" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Info</a>
                     <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monitor</a>
-                    <a class="nav-item nav-link" id="nav-pos-tab" data-toggle="tab" href="#nav-pos" role="tab" aria-controls="nav-pos" aria-selected="false">Position</a>
+                    <a class="nav-item nav-link <?php echo (($tab == 'pos') ? ' show active' : ''); ?>" id="nav-pos-tab" data-toggle="tab" href="#nav-pos" role="tab" aria-controls="nav-pos" aria-selected="false">Position</a>
                     <a class="nav-item nav-link disabled" id="nav-park-tab" data-toggle="tab" href="#nav-park" role="tab" aria-controls="nav-park" aria-selected="false">Park</a>
-                    <a class="nav-item nav-link" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-rec" aria-selected="false">Record</a>
+                    <a class="nav-item nav-link <?php echo (($tab == 'rec') ? ' show active' : ''); ?>" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-rec" aria-selected="false">Record</a>
                     <a class="nav-item nav-link" id="nav-loc-tab" data-toggle="tab" href="#nav-loc" role="tab" aria-controls="nav-loc" aria-selected="false">Locate</a>
                     <a class="nav-item nav-link" id="nav-nav-tab" data-toggle="tab" href="#nav-nav" role="tab" aria-controls="nav-nav" aria-selected="false">Navigate</a>
                     <?php endif; ?>
@@ -176,6 +181,7 @@ $maps = get_maps();
                                         <form target="_parent" method="post" >
                                         <input type="hidden" name="command" value="rec_single 0" />
                                         <input type="submit" value="Record Off" /> </br>
+                                        <input type="hidden" name="tab" value="rec" />
                                         </form>
                                     </div>
                             ');
@@ -195,7 +201,7 @@ $maps = get_maps();
                     }
                     else {
                         echo ('
-                            <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                            <div class="tab-pane fade' . (($tab == "") ? " show active" : "") . '" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
                                 <h2>Info</h2>
                                 <div class="left">
                                     <div>
@@ -258,7 +264,7 @@ $maps = get_maps();
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
+                            <div class="tab-pane fade' . (($tab == "pos") ? " show active" : "") . '" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
                                 <h2>Position</h2>
                                 <div class="left">
                                     <div>
@@ -276,6 +282,7 @@ $maps = get_maps();
                                             </br>
                                             <input type="submit" value="OK" id="load_pos_ok" style="visibility:hidden;" /> </br>
                                             </br>
+                                            <input type="hidden" name="tab" value="pos" />
                                         </form>
                                     </div>
                         <!--        <div>
@@ -283,16 +290,19 @@ $maps = get_maps();
                                             Clear positions
                                             <input type="hidden" name="command" value="clear_map" />
                                             <input type="submit" value="OK" /> </br>
+                                            <input type="hidden" name="tab" value="pos" />
                                         </form>
                                         <form target="_parent" method="post">
                                             <select name="mapname" >
                                             ' . $maps . '
                                             </select>
                                             <input type="submit" name="command" value="load_map" /> </br>
-                                            </form>
-                                            <form target="_parent" method="post">
+                                            <input type="hidden" name="tab" value="pos" />
+                                        </form>
+                                        <form target="_parent" method="post">
                                             <input type="text" name="mapname" /> </br>
                                             <input type="submit" name="command" value="save_map" /> </br>
+                                            <input type="hidden" name="tab" value="pos" />
                                         </form>
                                     </div> -->
                         ');
@@ -300,9 +310,10 @@ $maps = get_maps();
                             echo ('
                                     <div>
                                         <form name="pos_form" target="_parent" method="post">
-                                        <input type="text" name="pos" size="4" />
-                                        </br>
+                                            <input type="text" name="pos" size="4" />
+                                            </br>
                             <!--            <input type="submit" name="command" value="del_pos" /> </br>
+                                            <input type="hidden" name="tab" value="pos" />
                             -->         </form>
                                     </div>
                             ');
@@ -341,7 +352,7 @@ $maps = get_maps();
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
+                            <div class="tab-pane fade' . (($tab == "rec") ? " show active" : "") . '" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
                                 <h2>Record</h2>
                                 <div class="left">
                                     <div>
@@ -354,22 +365,26 @@ $maps = get_maps();
                         echo ('
                                             </br>
                                             <input type="submit" name="command" value="record_sta" /> </br>
+                                            <input type="hidden" name="tab" value="rec" />
                                         </form>
                                         <form target="_parent" method="post">
                                             <input type="hidden" name="command" value="set_num_pos" />
                                             <input type="text" name="posnum" value="' . $posnum . '" />
                                             <input type="submit" value="Set next position" /> </br>
+                                            <input type="hidden" name="tab" value="rec" />
                                         </form>
                                         <form target="_parent" method="post">
                                             <input type="hidden" name="command" value="set_session" />
                                             <input type="text" name="mapname" value="' . $mapname . '"/>
                                             <input type="submit" value="Set record session folder" /> </br>
+                                            <input type="hidden" name="tab" value="rec" />
                                         </form>
                                         <form name="pointform" target="_parent" method="post">
                                             <input type="hidden" name="command" value="rec_single 1" />
                                             x = <input type="text" name="form_x" size="4" />
                                             y = <input type="text" name="form_y" size="4" />
                                             <input type="submit" id="rec_button" style="visibility:hidden;" value="Record" /> </br>
+                                            <input type="hidden" name="tab" value="rec" />
                                             <p id="rec_text" style="visibility:visible;" >Set your position on the map to record!</p>
                                         </form>
                                     </div>
