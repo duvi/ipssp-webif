@@ -26,7 +26,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>iPark Positioning System</title>
+        <title>Indoor Positioning System</title>
         <link type="text/css" rel="stylesheet" href="res/style.css" />
 
         <script src="res/jquery.js"></script>

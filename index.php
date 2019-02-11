@@ -132,7 +132,7 @@ $maps = get_maps();
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>iPark Positioning System</title>
+        <title>Indoor Positioning System</title>
 
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -155,7 +155,7 @@ $maps = get_maps();
         <div class="container-fluid">
             <nav class="navbar fixed-top">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <span class="navbar-brand mb-0 h1">iPark Positioning System</span>
+                    <span class="navbar-brand mb-0 h1">Indoor Positioning System</span>
                     <?php if (!file_exists("recording")) : ?>
                     <a class="nav-item nav-link <?php echo (($tab == '') ? ' show active' : ''); ?>" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Info</a>
                     <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monitor</a>
