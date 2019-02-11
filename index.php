@@ -356,17 +356,7 @@ $maps = get_maps();
                                 <h2>Record</h2>
                                 <div class="left">
                                     <div>
-                                        Select recording stations<br/>
-                                        0: recorded<br/>
-                                        1: not recorded<br/><br/>
-                                        <form target="_parent" method="post">
-                        ');
-                        echo $stations_select_rec;
-                        echo ('
-                                            </br>
-                                            <input type="submit" name="command" value="record_sta" /> </br>
-                                            <input type="hidden" name="tab" value="rec" />
-                                        </form>
+                                        <p>Set recording options</p>
                                         <form target="_parent" method="post">
                                             <input type="hidden" name="command" value="set_num_pos" />
                                             <input type="text" name="posnum" value="' . $posnum . '" />
@@ -386,6 +376,17 @@ $maps = get_maps();
                                             <input type="submit" id="rec_button" style="visibility:hidden;" value="Record" /> </br>
                                             <input type="hidden" name="tab" value="rec" />
                                             <p id="rec_text" style="visibility:visible;" >Set your position on the map to record!</p>
+                                        </form>
+                                        Select recording stations<br/>
+                                        0: recorded<br/>
+                                        1: not recorded<br/><br/>
+                                        <form target="_parent" method="post">
+                        ');
+                        echo $stations_select_rec;
+                        echo ('
+                                            </br>
+                                            <input type="submit" name="command" value="record_sta" /> </br>
+                                            <input type="hidden" name="tab" value="rec" />
                                         </form>
                                     </div>
                         ');
