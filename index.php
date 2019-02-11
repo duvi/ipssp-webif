@@ -344,7 +344,6 @@ $maps = get_maps();
                             <div class="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
                                 <h2>Record</h2>
                                 <div class="left">
-                                    This module is not working at the moment!<br/><br/>
                                     <div>
                                         Select recording stations<br/>
                                         0: recorded<br/>
