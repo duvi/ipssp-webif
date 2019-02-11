@@ -110,9 +110,9 @@
             {
             $limit = (($pre_limit * $downrate) < $bottom) ? $bottom : (round($pre_limit * $downrate));
             }
-        $sql = "UPDATE station_list
-                SET x=" . $pos_x . ", y=" . $pos_y . ", lim=" . $limit . "
-                WHERE sta_id = '" . $param . "'";
+        $sql = "UPDATE `station_list`
+                SET `x`=" . $pos_x . ", `y`=" . $pos_y . ", `lim`=" . $limit . "
+                WHERE `sta_id` = '" . $param . "'";
         $result = mysqli_query($connection,$sql);
         mysqli_free_result($result);
 
@@ -138,15 +138,15 @@
         switch ($command)
             {
             case "comp_diff":
-                $sql_defmon = "SELECT signal, mon_id
-                                FROM station_data
-                                WHERE signal = (SELECT min(signal)
-                                                FROM station_data
-                                                WHERE station_data.sta_id = '" . $param . "'
+                $sql_defmon = "SELECT `signal`, `mon_id`
+                                FROM `station_data`
+                                WHERE `signal` = (SELECT min(`signal`)
+                                                FROM `station_data`
+                                                WHERE `station_data`.`sta_id` = '" . $param . "'
                                                 " . $timeout_sql . ")
-                                AND sta_id = '" . $param . "'
+                                AND `sta_id` = '" . $param . "'
                                 " . $timeout_sql . "
-                                ORDER BY time_rcv DESC
+                                ORDER BY `time_rcv` DESC
                                 ";
                 $result = mysqli_query($connection,$sql_defmon);
                 if (!$result)
@@ -160,9 +160,9 @@
                     $def_mon_id = $row["mon_id"];
                     $message .= "Default monitor: " . $def_mon_id . " " . $def_mon_signal . " dBm\n";
 
-                    $sql = "SELECT t1.pos_id,
-                                    t1.x,
-                                    t1.y,
+                    $sql = "SELECT `t1`.`pos_id`,
+                                    `t1`.`x`,
+                                    `t1`.`y`,
                                     AVG(CASE WHEN ABS(sta_diff)<ABS(t1.mean-def_mon_signal)
                                         THEN sta_diff/(t1.mean-def_mon_signal)
                                         ELSE (t1.mean-def_mon_signal)/sta_diff
@@ -172,22 +172,22 @@
                                 FROM position_data
                                 LEFT JOIN position_list
                                 ON position_list.pos_id = position_data.pos_id
-                                WHERE mon_id <> '" . $def_mon_id . "'
+                                WHERE `mon_id` <> '" . $def_mon_id . "'
                                 )t1
                             LEFT JOIN (
-                                SELECT pos_id, signal AS def_mon_signal
+                                SELECT `pos_id`, `signal` AS def_mon_signal
                                 FROM (
                                     SELECT *
-                                    FROM position_data
-                                    WHERE mon_id = '" . $def_mon_id . "'
+                                    FROM `position_data`
+                                    WHERE `mon_id` = '" . $def_mon_id . "'
                                      ) AS def_mon
                                 )t2
                             ON t2.pos_id = t1.pos_id
                             INNER JOIN (
-                                SELECT mon_id, (signal - " . $def_mon_signal . ") AS sta_diff
-                                FROM station_data
-                                WHERE sta_id = '" . $param . "'
-                                AND mon_id <> '" . $def_mon_id . "'
+                                SELECT `mon_id`, (`signal` - " . $def_mon_signal . ") AS `sta_diff`
+                                FROM `station_data`
+                                WHERE `sta_id` = '" . $param . "'
+                                AND `mon_id` <> '" . $def_mon_id . "'
                                 " . $timeout_sql . "
                                 )t3
                             ON t3.mon_id = t1.mon_id
@@ -201,25 +201,25 @@
                     }
                 break;
             case "comp_knn":
-                $sql = "SELECT t1.pos_id,
-                                t1.x,
-                                t1.y,
-                                1/SUM(POW(POW(10,(0-mean)/10)-POW(10,(0-signal)/10),2)) AS sum_diff
+                $sql = "SELECT `t1`.`pos_id`,
+                                `t1`.`x`,
+                                `t1`.`y`,
+                                1/SUM(POW(POW(10,(0-`mean`)/10)-POW(10,(0-`signal`)/10),2)) AS `sum_diff`
                         FROM (
-                            SELECT position_data.pos_id, position_data.mon_id, position_data.mean, position_list.x, position_list.y
-                            FROM position_data
-                            LEFT JOIN position_list
-                            ON position_list.pos_id = position_data.pos_id
+                            SELECT `position_data`.`pos_id`, `position_data`.`mon_id`, `position_data`.`mean`, `position_list`.`x`, `position_list`.`y`
+                            FROM `position_data`
+                            LEFT JOIN `position_list`
+                            ON `position_list`.`pos_id` = `position_data`.`pos_id`
                             )t1
                         INNER JOIN (
-                            SELECT mon_id, signal
-                            FROM station_data
-                            WHERE sta_id = '" . $param . "'
+                            SELECT `mon_id`, `signal`
+                            FROM `station_data`
+                            WHERE `sta_id` = '" . $param . "'
                             " . $timeout_sql . "
                             )t2
-                        ON t2.mon_id = t1.mon_id
-                        GROUP BY pos_id
-                        ORDER BY sum_diff
+                        ON `t2`.`mon_id` = `t1`.`mon_id`
+                        GROUP BY `pos_id`
+                        ORDER BY `sum_diff`
                 ";
                 break;
             }
@@ -234,13 +234,13 @@
                 }
             else
                 {
-                calc_area($result);
-//                calc_point($result);
+//                calc_area($result);
+                calc_point($result);
                 }
 
-            $sql = "SELECT r, g, b, x, y, lim
-                    FROM station_list
-                    WHERE sta_id = '" . $param . "'";
+            $sql = "SELECT `r`, `g`, `b`, `x`, `y`, `lim`
+                    FROM `station_list`
+                    WHERE `sta_id` = '" . $param . "'";
             $result = mysqli_query($connection,$sql);
             if (!$result)
                 {
@@ -249,12 +249,13 @@
                 }
             else
                 {
-                $sta_r = mysqli_result($result, 0, 0);
-                $sta_g = mysqli_result($result, 0, 1);
-                $sta_b = mysqli_result($result, 0, 2);
-                $pre_x = mysqli_result($result, 0, 3);
-                $pre_y = mysqli_result($result, 0, 4);
-                $pre_limit = mysqli_result($result, 0, 5);
+                $row = mysqli_fetch_assoc($result);
+                $sta_r = $row['r'];
+                $sta_g = $row['g'];
+                $sta_b = $row['b'];
+                $pre_x = $row['x'];
+                $pre_y = $row['y'];
+                $pre_limit = $row['lim'];
                 $message .= "Colors: " . $sta_r . " " . $sta_g . " " . $sta_b . "\n";
                 $message .= "Ex-position: " . $pre_x . " " . $pre_y . " Limit: " . $pre_limit . "\n";
                 $message .= "Alg-position: " . $pos_x . " " . $pos_y;
