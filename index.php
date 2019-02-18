@@ -400,6 +400,11 @@ $maps = get_maps();
                                 <div class="main">
                                     <div id="record_map_div" class="map" onclick="point_it(event)" style="background-image:url(' . $mapfile . '); width:' . $imagesize[0] . 'px; height:' . $imagesize[1] . 'px;">
                                         <img src="img/rotpunkt.png" id="cross" style="position:relative;visibility:hidden;z-index:2;">
+                        ');
+                        foreach ($positions as $position) {
+                            echo ('<img src="img/rotpunkt.png" title="' . $position["name"] . '" style="position:absolute;float:none;z-index:2;opacity:0.6;left:' . ($position["x"]-5) . 'px;top:' . ($position["y"]-5) . 'px;"> ');
+                        }
+                        echo ('
                                     </div>
                                     <div id=record_message class="info">'
                                         . nl2br($message) . '
