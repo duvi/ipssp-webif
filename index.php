@@ -146,6 +146,9 @@ $maps = get_maps();
           var src_y;
           var dest_x;
           var dest_y;
+          $(document).ready(function(){
+              get_folders();
+          });
         </script>
 
     </head>
@@ -273,7 +276,7 @@ $maps = get_maps();
                                             Load positions<br/>
                                             <input type="hidden" name="command" value="load_sql" />
                                             Session:
-                                            <select name="mapname" onChange="document.getElementById(\'load_pos_ok\').style.visibility = \'visible\'; get_folders();" id="map_select">
+                                            <select name="mapname" onChange="get_folders();" id="map_select">
                                             ' . $sessions . '
                                             </select>
                                             </br>

@@ -346,7 +346,8 @@ function clearCanvas(name){
     dataType: "json",
     success: function(data){
         document.getElementById("map_select2").innerHTML = data.message;
-	}
+        document.getElementById("load_pos_ok").style.visibility = 'visible';
+        }
     });
   }
 
