@@ -132,12 +132,6 @@
 	    }
     }
 */
-  function clearCanvas(name){
-    var canvas = document.getElementById(name);
-    var ctx = canvas.getContext("2d");
-    ctx.clearRect (0, 0, 623, 379);
-    }
-
   function locate(){
 
     var canvas = document.getElementById("locate_canvas");
@@ -146,7 +140,7 @@
 
     document.getElementById("locate_punkt").innerHTML = "";
     document.getElementById("locate_message").innerHTML = "";
-    clearCanvas("locate_canvas");
+    ctx.clearRect (0, 0, canvas.width, canvas.height);
 
     for (var i=0; i < document.locate_form.command.length; i++)
 	{
