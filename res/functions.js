@@ -132,6 +132,12 @@
 	    }
     }
 */
+function clearCanvas(name){
+    var canvas = document.getElementById(name);
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect (0, 0, canvas.width, canvas.height);
+}
+
   function locate(){
 
     var canvas = document.getElementById("locate_canvas");
