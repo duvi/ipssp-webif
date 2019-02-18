@@ -65,3 +65,9 @@ body {
     z-index: 2;
 }
 
+.user_punkt {
+    display: inline-block;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+}

@@ -116,9 +116,10 @@ function print_stations_checkbox($stations) {
 
     if ($stations) {
         foreach($stations as $station) {
-            $result .= '<label><input style="background-color:rgb(' . $station["r"] . ',' . $station["g"] . ',' . $station["b"] .');" type="checkbox" name="sta" value="' . $station["mac"];
-            $result .= '"';
-            $result .= ' />' . $station["mac"];
+            $result .= '<label>';
+            $result .= '<input type="checkbox" name="sta" value="' . $station["mac"] . '" />';
+            $result .= '<span class="user_punkt" style="background-color:rgb(' . $station["r"] . ',' . $station["g"] . ',' . $station["b"] .');"></span>';
+            $result .= $station["mac"];
             $result .= '</label><br />';
         }
     }
