@@ -36,7 +36,9 @@ defined('_IPSSP') or die;
             <input type="hidden" name="tab" value="rec" />
         </form>
     </div>
-    <?php print_info($info_message); ?>
+    <div class="info">
+        <?php echo nl2br($info_message); ?>
+    </div>
 </div>
 <div class="main">
     <div id="record_map_div" class="map" onclick="point_it(event)" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
@@ -45,7 +47,7 @@ defined('_IPSSP') or die;
         <img src="img/rotpunkt.png" title="<?php echo $position["name"]; ?>" style="position:absolute;float:none;z-index:2;opacity:0.6;left:<?php echo $position["x"]-5; ?>px;top:<?php echo $position["y"]-5; ?>px;">
 <?php endforeach; ?>
     </div>
-    <div id=record_message class="info">
+    <div id=record_message class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

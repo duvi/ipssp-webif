@@ -19,10 +19,12 @@ defined('_IPSSP') or die;
         </form>
 <?php endif; ?>
     </div>
-    <?php print_info($info_message); ?>
+    <div class="info">
+        <?php echo nl2br($info_message); ?>
+    </div>
 </div>
 <div class="main">
-    <div id=info_message class="info">
+    <div id=info_message class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

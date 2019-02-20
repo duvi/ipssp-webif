@@ -252,14 +252,6 @@ function get_maps() {
     return $result;
 }
 
-function print_info($msg) {
-    echo ('
-        <div id="info">
-        ' . nl2br($msg) . '
-        </div>
-    ');
-}
-
 function get_mac() {
     $ipFound = FALSE;
     // This code is under the GNU Public Licence

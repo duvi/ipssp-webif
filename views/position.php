@@ -52,7 +52,9 @@ defined('_IPSSP') or die;
         </form>
 <?php endif; ?>
     </div>
-    <?php print_info($info_message); ?>
+    <div class="info">
+        <?php echo nl2br($info_message); ?>
+    </div>
 </div>
 <div class="main" >
     <div id="positions" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
@@ -60,7 +62,7 @@ defined('_IPSSP') or die;
         <img src="img/rotpunkt.png" title="<?php echo $position["name"]; ?>" onClick="document.getElementById('pos_message').innerHTML = 'Loading...'; show_pos(<?php echo $position["name"]; ?>);" style="position:absolute;float:none;z-index:2;opacity:0.8;cursor:pointer;left:<?php echo $position["x"]-5; ?>px;top:<?php echo $position["y"]-5; ?>px;">
 <?php endforeach; ?>
     </div>
-    <div id=pos_message class="info">
+    <div id=pos_message class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

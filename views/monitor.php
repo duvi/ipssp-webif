@@ -11,7 +11,9 @@ defined('_IPSSP') or die;
 <?php endforeach; ?>
         </form>
     </div>
-    <?php print_info($info_message); ?>
+    <div class="info">
+        <?php echo nl2br($info_message); ?>
+    </div>
 </div>
 <div class="main">
     <div id="monitors" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
@@ -20,7 +22,7 @@ defined('_IPSSP') or die;
 <?php endforeach; ?>
         <div id="mon_punkt"> </div>
     </div>
-    <div id=mon_message class="info">
+    <div id=mon_message class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

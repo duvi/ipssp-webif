@@ -7,12 +7,14 @@ defined('_IPSSP') or die;
     <div class="forms">
         Click on a parking place to change its status!<br><br>
     </div>
-    <?php print_info($info_message); ?>
+    <div class="info">
+        <?php echo nl2br($info_message); ?>
+    </div>
 </div>
 <div class="main">
     <div id="park_map" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
     </div>
-    <div id=park_message class="info">
+    <div id=park_message class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

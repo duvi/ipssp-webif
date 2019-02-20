@@ -19,14 +19,16 @@ defined('_IPSSP') or die;
             <input type="button" id="locate_stop" value="stop" onClick="document.getElementById('locate_start').style.visibility = 'visible'; document.getElementById('locate_stop').style.visibility = 'hidden'; clearCanvas('locate_canvas'); clearTimeout(locate_timer); " style="visibility:hidden;" >
         </form>
     </div>
-    <?php print_info($info_message); ?>
+    <div class="info">
+        <?php echo nl2br($info_message); ?>
+    </div>
 </div>
 <div class="main">
     <div id="locate_map" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
         <canvas id="locate_canvas" width="<?php echo $imagesize[0]; ?>" height="<?php echo $imagesize[1]; ?>" style="position: absolute;"></canvas>
         <div id="locate_punkt"> </div>
     </div>
-    <div id=locate_message class="info">
+    <div id=locate_message class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

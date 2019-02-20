@@ -49,14 +49,11 @@ body {
     margin-bottom: 10px;
 }
 
-#info {
+.info {
     background-color: #ffffff;
-/*    position: absolute; */
-    width: 100%;
-    bottom: 0px;
 }
 
-.info {
+.message {
     height: 400px;
     background-color:#666666;
     border: 2px solid black;
