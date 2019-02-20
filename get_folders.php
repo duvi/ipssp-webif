@@ -11,7 +11,7 @@ if ($_POST && isset($_POST['session'])) {
 /*              if (!strncmp($entry, $ses, 10)) {
                     $result .= ' selected="selected"';
                 }
-*/              $result .= ' >' . $entry . '</option></br>';
+*/              $result .= ' >' . $entry . '</option><br>';
             }
         }
     closedir($handle);

@@ -176,7 +176,7 @@ function clearCanvas(name){
 	                ctx.fillStyle = "rgba("+data.r+","+data.g+","+data.b+", 0.6)";
 	                ctx.fill();
 	                }
-	            document.getElementById("locate_message").innerHTML += command + " " + station + "</br>" + data.message;
+	            document.getElementById("locate_message").innerHTML += command + " " + station + "<br>" + data.message;
 	            }
 	        });
 	    }
@@ -217,7 +217,7 @@ function clearCanvas(name){
             src_x = data.x;
             src_y = data.y;
             }
-        document.getElementById("compare_message").innerHTML = command + " " + station + "</br>" + data.message;
+        document.getElementById("compare_message").innerHTML = command + " " + station + "<br>" + data.message;
         }
     });
     if (src_x && src_y && dest_x && dest_y)
@@ -325,7 +325,7 @@ function clearCanvas(name){
             document.getElementById(monitor).style.opacity = 1;
             $.each(data.result, function(i, item)
                 {
-//                document.getElementById("mon_punkt").innerHTML += '<img src="img/rotpunkt.png" title="' +  item.signal + '" style="position:absolute;float:none;z-index:1;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;"></br>';
+//                document.getElementById("mon_punkt").innerHTML += '<img src="img/rotpunkt.png" title="' +  item.signal + '" style="position:absolute;float:none;z-index:1;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;"><br>';
                 document.getElementById("mon_punkt").innerHTML += '<div style="left:' + (item.x-7) + 'px;top:' + (item.y-10) + 'px;">' +  item.signal + '</div>';
                 });
             }

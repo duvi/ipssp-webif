@@ -138,7 +138,7 @@ function print_positions($positions, $pos) {
             if (!strncmp($position["name"], $pos, 10)) {
                 $result .= ' selected="selected"';
             }
-            $result .= ' >' . $position["name"] . '</option></br>';
+            $result .= ' >' . $position["name"] . '</option><br>';
         }
     }
 
@@ -226,7 +226,7 @@ function get_session($ses) {
                 if (!strncmp($entry, $ses, 10)) {
                     $result .= ' selected="selected"';
                 }
-                $result .= ' >' . $entry . '</option></br>';
+                $result .= ' >' . $entry . '</option><br>';
             }
         }
         closedir($handle);
@@ -243,7 +243,7 @@ function get_maps() {
             if (!is_dir($entry) && strstr($entry, ".map")) {
                 $entry = substr($entry, 0, -strlen(".map"));
                 $result .= '<option value="' . $entry . '"';
-                $result .= ' >' . $entry . '</option></br>';
+                $result .= ' >' . $entry . '</option><br>';
             }
         }
         closedir($handle);
