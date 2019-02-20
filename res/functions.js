@@ -326,7 +326,7 @@ function clearCanvas(name){
             $.each(data.result, function(i, item)
                 {
 //                document.getElementById("mon_punkt").innerHTML += '<img src="img/rotpunkt.png" title="' +  item.signal + '" style="position:absolute;float:none;z-index:1;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;"></br>';
-                document.getElementById("mon_punkt").innerHTML += '<p style="color:red;position:absolute;float:none;z-index:1;left:' + (item.x-7) + 'px;top:' + (item.y-10) + 'px;">' +  item.signal + '</p></br>';
+                document.getElementById("mon_punkt").innerHTML += '<div style="left:' + (item.x-7) + 'px;top:' + (item.y-10) + 'px;">' +  item.signal + '</div>';
                 });
             }
         });
