@@ -83,7 +83,6 @@
             type: "POST",
             data: ({park_id: park_id, free: status}),
             dataType: "json",
-            async: false,
             success: function(data){
                 document.getElementById("park_message").innerHTML = data.message;
                 }
@@ -258,7 +257,6 @@ function clearCanvas(name){
         url: "res/list_pos.php",
         type: "POST",
         dataType: "json",
-        async: false,
         success: function(data){
             document.getElementById("info_message").innerHTML = data.message;
             }
@@ -270,7 +268,6 @@ function clearCanvas(name){
         url: "res/show_all.php",
         type: "POST",
         dataType: "json",
-        async: false,
         success: function(data){
             document.getElementById("info_message").innerHTML = data.message;
             }
@@ -291,7 +288,6 @@ function clearCanvas(name){
         type: "POST",
         data: ({sta: station}),
         dataType: "json",
-        async: false,
         success: function(data){
             document.getElementById("info_message").innerHTML = data.message;
             }
@@ -317,7 +313,6 @@ function clearCanvas(name){
         type: "POST",
         data: ({mon: monitor}),
         dataType: "json",
-        async: false,
         success: function(data){
 //            document.getElementById("mon_message").innerHTML = data.message;
             document.getElementById("mon_punkt").innerHTML = "";
