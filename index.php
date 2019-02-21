@@ -13,7 +13,6 @@ $info_message = "";
 $posnum = "";
 $mapname = "";
 $stations = array();
-$stations_checkbox = "";
 $stations_select = "";
 $stations_select_rec = "";
 $positions = array();
@@ -111,7 +110,6 @@ $info_message .= "Your IP: " . $ip . "\n";
 $posnum = get_num_pos();
 $mapname = get_map_name();
 $stations = get_stations();
-$stations_checkbox = print_stations_checkbox($stations);
 
 if (isset($_POST['sta'])) {
     $stations_select = print_stations($stations, $_POST['sta'], 0);

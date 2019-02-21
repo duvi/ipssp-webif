@@ -109,24 +109,6 @@ function print_stations($stations, $sta, $rec) {
     return $result;
 }
 
-function print_stations_checkbox($stations) {
-    include('res/config.php');
-    global $info_message;
-    $result = "";
-
-    if ($stations) {
-        foreach($stations as $station) {
-            $result .= '<label>';
-            $result .= '<input type="checkbox" name="sta" value="' . $station["mac"] . '" />';
-            $result .= '<span class="user_punkt" style="background-color:rgb(' . $station["r"] . ',' . $station["g"] . ',' . $station["b"] .');"></span>';
-            $result .= $station["mac"];
-            $result .= '</label><br />';
-        }
-    }
-
-    return $result;
-}
-
 function print_positions($positions, $pos) {
     include('res/config.php');
     global $info_message;
