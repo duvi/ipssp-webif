@@ -150,6 +150,7 @@ $areas = get_areas();
           var dest_y;
           $(document).ready(function(){
               get_folders();
+              get_stations();
           });
         </script>
 

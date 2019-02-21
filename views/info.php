@@ -11,13 +11,10 @@ defined('_IPSSP') or die;
             Show all position info:
             <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; list_pos();" value="Show"/> <br>
         </form>
-<?php if ($stations_select) : ?>
         Show station info:<br>
         <form name="info_form" target="_parent" method="post">
-            <?php echo $stations_select; ?>
-            <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; show_sta();" value="Show"/>
         </form>
-<?php endif; ?>
+        <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; get_stations();" value="Refresh"/><br><br>
     </div>
     <div class="info">
         <?php echo nl2br($info_message); ?>

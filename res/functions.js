@@ -239,13 +239,7 @@ function show_all() {
     });
 }
 
-function show_sta() {
-    for (var j=0; j < document.info_form.sta.length; j++) {
-        if (document.info_form.sta[j].checked) {
-            var station = document.info_form.sta[j].value;
-        }
-    }
-
+function show_sta(station) {
     $.ajax({
         url: "res/show_sta.php",
         type: "POST",
@@ -303,6 +297,21 @@ function get_folders() {
         success: function(data) {
             document.getElementById("map_select2").innerHTML = data.message;
             document.getElementById("load_pos_ok").style.visibility = 'visible';
+        }
+    });
+}
+
+function get_stations() {
+    $.ajax({
+        url: "res/get_stations.php",
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            document.getElementById("info_message").innerHTML = data.message;
+            document.info_form.innerHTML = '';
+            $.each(data.result, function(i, item) {
+                document.info_form.innerHTML += '<label onclick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; show_sta(\'' + item.sta_id + '\');"><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
+            });
         }
     });
 }
