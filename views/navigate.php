@@ -36,7 +36,7 @@ defined('_IPSSP') or die;
     <script>
         //drawpark();
     </script>
-    <div id=compare_message class="message">
+    <div id="compare_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

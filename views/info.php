@@ -24,7 +24,7 @@ defined('_IPSSP') or die;
     </div>
 </div>
 <div class="main">
-    <div id=info_message class="message">
+    <div id="info_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

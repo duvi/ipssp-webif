@@ -62,7 +62,7 @@ defined('_IPSSP') or die;
         <img src="img/rotpunkt.png" title="<?php echo $position["name"]; ?>" onClick="document.getElementById('pos_message').innerHTML = 'Loading...'; show_pos(<?php echo $position["name"]; ?>);" style="position:absolute;float:none;z-index:2;opacity:0.8;cursor:pointer;left:<?php echo $position["x"]-5; ?>px;top:<?php echo $position["y"]-5; ?>px;">
 <?php endforeach; ?>
     </div>
-    <div id=pos_message class="message">
+    <div id="pos_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

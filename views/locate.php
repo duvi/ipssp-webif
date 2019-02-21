@@ -28,7 +28,7 @@ defined('_IPSSP') or die;
         <canvas id="locate_canvas" width="<?php echo $imagesize[0]; ?>" height="<?php echo $imagesize[1]; ?>" style="position: absolute;"></canvas>
         <div id="locate_punkt"> </div>
     </div>
-    <div id=locate_message class="message">
+    <div id="locate_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

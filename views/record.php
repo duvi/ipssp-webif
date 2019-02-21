@@ -47,7 +47,7 @@ defined('_IPSSP') or die;
         <img src="img/rotpunkt.png" title="<?php echo $position["name"]; ?>" style="position:absolute;float:none;z-index:2;opacity:0.6;left:<?php echo $position["x"]-5; ?>px;top:<?php echo $position["y"]-5; ?>px;">
 <?php endforeach; ?>
     </div>
-    <div id=record_message class="message">
+    <div id="record_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

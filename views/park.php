@@ -14,7 +14,7 @@ defined('_IPSSP') or die;
 <div class="main">
     <div id="park_map" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
     </div>
-    <div id=park_message class="message">
+    <div id="park_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>

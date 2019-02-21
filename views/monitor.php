@@ -22,7 +22,7 @@ defined('_IPSSP') or die;
 <?php endforeach; ?>
         <div id="mon_punkt"> </div>
     </div>
-    <div id=mon_message class="message">
+    <div id="mon_message" class="message">
         <?php echo nl2br($message); ?>
     </div>
 </div>
