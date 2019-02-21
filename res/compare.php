@@ -113,9 +113,7 @@
         $sql = "UPDATE `station_list`
                 SET `x`=" . $pos_x . ", `y`=" . $pos_y . ", `lim`=" . $limit . "
                 WHERE `sta_id` = '" . $param . "'";
-        $result = mysqli_query($connection,$sql);
-        mysqli_free_result($result);
-
+        mysqli_query($connection,$sql);
         }
 
     if ($_POST && isset($_POST['command']) && isset($_POST['sta']))
