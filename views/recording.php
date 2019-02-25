@@ -18,7 +18,7 @@ defined('_IPSSP') or die;
 </div>
 <div class="main">
     <div class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">
-        <img src="img/rotpunkt.png" id="blink_img" onLoad="blink(); seconds();" style="position:relative;z-index:2;left:<?php echo $position["x"]-5; ?>px;top:<?php echo $position["y"]-5; ?>px;">
+        <img src="img/rotpunkt.png" id="blink_img" onLoad="blink(); seconds();" style="position:relative;z-index:2;left:<?php echo $pos_x-5; ?>px;top:<?php echo $pos_y-5; ?>px;">
     </div>
     <div id="record_message" class="message">
         <?php echo nl2br($message); ?>
