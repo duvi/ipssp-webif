@@ -13,6 +13,7 @@ defined('_IPSSP') or die;
         </form>
         Show station info:<br>
         <form name="info_form" target="_parent" method="post">
+            <div class="stations"></div>
         </form>
     </div>
 </div>

@@ -122,15 +122,15 @@ function locate() {
     document.getElementById("locate_message").innerHTML = "";
     ctx.clearRect (0, 0, canvas.width, canvas.height);
 
-    if (!document.locate_command.command || !document.locate_form.sta) {
+    if (!document.locate_form.command || !document.locate_form.sta) {
         document.getElementById("locate_message").innerHTML = "Station or command list empty";
         locate_timer = setTimeout("locate()", 1000);
         return;
     }
 
-    for (var i=0; i < document.locate_command.command.length; i++) {
-        if (document.locate_command.command[i].checked) {
-            var command = document.locate_command.command[i].value;
+    for (var i=0; i < document.locate_form.command.length; i++) {
+        if (document.locate_form.command[i].checked) {
+            var command = document.locate_form.command[i].value;
         }
     }
 
@@ -323,11 +323,11 @@ function get_stations() {
         dataType: "json",
         success: function(data) {
             document.getElementById("sidebar_message").innerHTML = data.message;
-            document.info_form.innerHTML = '';
-            document.locate_form.innerHTML = '';
+            document.info_form.querySelector('.stations').innerHTML = '';
+            document.locate_form.querySelector('.stations').innerHTML = '';
             $.each(data.result, function(i, item) {
-                document.info_form.innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
-                document.locate_form.innerHTML += '<label><input type="checkbox" name="sta" value="' + item.sta_id + '"' + (locate_stations[item.sta_id] ? ' checked' : '') + '><span class="user_punkt" style="background-color:rgb(' + item.r + ',' + item.g + ',' + item.b + ');"></span>' + item.sta_id + '</label>';
+                document.info_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
+                document.locate_form.querySelector('.stations').innerHTML += '<label><input type="checkbox" name="sta" value="' + item.sta_id + '"' + (locate_stations[item.sta_id] ? ' checked' : '') + '><span class="user_punkt" style="background-color:rgb(' + item.r + ',' + item.g + ',' + item.b + ');"></span>' + item.sta_id + '</label>';
             });
         }
     });
