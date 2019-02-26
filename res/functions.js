@@ -322,7 +322,7 @@ function get_stations() {
         type: "POST",
         dataType: "json",
         success: function(data) {
-            document.getElementById("info_message").innerHTML = data.message;
+            document.getElementById("sidebar_message").innerHTML = data.message;
             document.info_form.innerHTML = '';
             document.locate_form.innerHTML = '';
             $.each(data.result, function(i, item) {

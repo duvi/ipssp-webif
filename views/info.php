@@ -14,7 +14,6 @@ defined('_IPSSP') or die;
         Show station info:<br>
         <form name="info_form" target="_parent" method="post">
         </form>
-        <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; get_stations();" value="Refresh"/><br><br>
     </div>
 </div>
 <div class="main">

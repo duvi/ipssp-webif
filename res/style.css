@@ -24,6 +24,10 @@ body {
     border-color: black;
 }
 
+.sidebar > div {
+    padding: 10px;
+}
+
 .left {
     width: 200px;
     background-color: #666666;
