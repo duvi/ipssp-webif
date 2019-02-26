@@ -17,6 +17,7 @@ defined('_IPSSP') or die;
             <br>
             <input type="button" id="locate_start" value="start" onClick="document.getElementById('locate_start').style.visibility = 'hidden'; document.getElementById('locate_stop').style.visibility = 'visible'; locate();">
             <input type="button" id="locate_stop" value="stop" onClick="document.getElementById('locate_start').style.visibility = 'visible'; document.getElementById('locate_stop').style.visibility = 'hidden'; clearCanvas('locate_canvas'); clearTimeout(locate_timer); " style="visibility:hidden;" >
+            <input type="button" onClick="document.getElementById('locate_message').innerHTML = 'Loading...'; get_stations();" value="Refresh"/>
         </form>
     </div>
     <div class="info">
