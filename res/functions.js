@@ -122,6 +122,12 @@ function locate() {
     document.getElementById("locate_message").innerHTML = "";
     ctx.clearRect (0, 0, canvas.width, canvas.height);
 
+    if (!document.locate_command.command || !document.locate_form.sta) {
+        document.getElementById("locate_message").innerHTML = "Station or command list empty";
+        locate_timer = setTimeout("locate()", 1000);
+        return;
+    }
+
     for (var i=0; i < document.locate_command.command.length; i++) {
         if (document.locate_command.command[i].checked) {
             var command = document.locate_command.command[i].value;
