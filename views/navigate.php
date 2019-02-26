@@ -6,8 +6,7 @@ defined('_IPSSP') or die;
 <div class="left">
     <div class="forms">
         <form name="compare_form" target="_parent" method="post">
-            <?php echo $stations_select; ?>
-            <br>
+            <div class="stations"></div>
             <label><input type="radio" name="command" value="compare" />compare</label><br>
             <label><input type="radio" name="command" value="comp_diff" CHECKED/>comp_diff</label><br>
             <label><input type="radio" name="command" value="comp_norm" />comp_norm</label><br>
