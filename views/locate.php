@@ -6,15 +6,8 @@ defined('_IPSSP') or die;
 <div class="left">
     <div class="forms">
         <form name="locate_form" target="_parent" method="post">
-<?php foreach ($stations as $station) : ?>
-            <label>
-                <input type="checkbox" name="sta" value="<?php echo $station["mac"]; ?>" />
-                <span class="user_punkt" style="background-color:rgb(<?php echo $station["r"] . ',' . $station["g"] . ',' . $station["b"]; ?>);"></span>
-                <?php echo $station["mac"]; ?>
-            </label>
-            <br>
-<?php endforeach; ?>
-            <br>
+        </form>
+        <form name="locate_command" target="_parent" method="post">
             <label><input type="radio" name="command" value="compare" />compare</label><br>
             <label><input type="radio" name="command" value="comp_diff" CHECKED/>comp_diff</label><br>
             <label><input type="radio" name="command" value="comp_norm" />comp_norm</label><br>

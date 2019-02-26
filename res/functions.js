@@ -122,9 +122,9 @@ function locate() {
     document.getElementById("locate_message").innerHTML = "";
     ctx.clearRect (0, 0, canvas.width, canvas.height);
 
-    for (var i=0; i < document.locate_form.command.length; i++) {
-        if (document.locate_form.command[i].checked) {
-            var command = document.locate_form.command[i].value;
+    for (var i=0; i < document.locate_command.command.length; i++) {
+        if (document.locate_command.command[i].checked) {
+            var command = document.locate_command.command[i].value;
         }
     }
 
@@ -302,6 +302,15 @@ function get_folders() {
 }
 
 function get_stations() {
+    var locate_stations = {};
+    if (document.locate_form.sta) {
+        for (var j=0; j < document.locate_form.sta.length; j++) {
+            if (document.locate_form.sta[j].checked) {
+                locate_stations[document.locate_form.sta[j].value] = true;
+            }
+        }
+    }
+
     $.ajax({
         url: "res/get_stations.php",
         type: "POST",
@@ -309,8 +318,10 @@ function get_stations() {
         success: function(data) {
             document.getElementById("info_message").innerHTML = data.message;
             document.info_form.innerHTML = '';
+            document.locate_form.innerHTML = '';
             $.each(data.result, function(i, item) {
                 document.info_form.innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
+                document.locate_form.innerHTML += '<label><input type="checkbox" name="sta" value="' + item.sta_id + '"' + (locate_stations[item.sta_id] ? ' checked' : '') + '><span class="user_punkt" style="background-color:rgb(' + item.r + ',' + item.g + ',' + item.b + ');"></span>' + item.sta_id + '</label>';
             });
         }
     });
