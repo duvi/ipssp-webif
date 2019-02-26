@@ -310,8 +310,15 @@ function get_stations() {
             document.getElementById("info_message").innerHTML = data.message;
             document.info_form.innerHTML = '';
             $.each(data.result, function(i, item) {
-                document.info_form.innerHTML += '<label onclick="document.getElementById(\'info_message\').innerHTML = \'Loading...\'; show_sta(\'' + item.sta_id + '\');"><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
+                document.info_form.innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
             });
         }
     });
 }
+
+$(document).ready(function(){
+    $(document.info_form).on('change', 'input', function(){
+        document.getElementById('info_message').innerHTML = 'Loading...';
+        show_sta($(this).val());
+    });
+});
