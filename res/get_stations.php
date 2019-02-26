@@ -4,10 +4,10 @@ require_once('db.php');
 
 $message = "";
 
-    $sql = "SELECT sta_id, record, r, g, b
-            FROM station_list
-            WHERE time_last > DATE_SUB(NOW(), INTERVAL 30 SECOND)
-            ORDER BY time_last DESC";
+    $sql = "SELECT `sta_id`, `record`, `r`, `g`, `b`
+            FROM `station_list`
+            WHERE `time_last` > DATE_SUB(NOW(), INTERVAL 30 SECOND)
+            ORDER BY `time_last` DESC";
 
     $result = db_select($sql);
     if (!$result) {
