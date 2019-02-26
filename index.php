@@ -174,8 +174,8 @@ $areas = get_areas();
                     <?php endif; ?>
                 </div>
             </nav>
-            <div id="maincontent">
-                <div class="tab-content" id="nav-tabContent">
+            <div id="maincontent" class="row">
+                <div class="tab-content col-sm-10" id="nav-tabContent">
                     <?php
                     if (file_exists("recording")) {
                         get_rec_coord();
@@ -233,6 +233,9 @@ $areas = get_areas();
                         ');
                     }
                     ?>
+                </div>
+                <div class="col-sm-2">
+                    <?php include_once('views/sidebar.php'); ?>
                 </div>
             </div>
         </div>

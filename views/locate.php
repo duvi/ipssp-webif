@@ -20,9 +20,6 @@ defined('_IPSSP') or die;
             <input type="button" onClick="document.getElementById('locate_message').innerHTML = 'Loading...'; get_stations();" value="Refresh"/>
         </form>
     </div>
-    <div class="info">
-        <?php echo nl2br($info_message); ?>
-    </div>
 </div>
 <div class="main">
     <div id="locate_map" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">

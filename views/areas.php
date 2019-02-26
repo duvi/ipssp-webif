@@ -4,9 +4,6 @@ defined('_IPSSP') or die;
 
 <h2>Areas</h2>
 <div class="left">
-    <div class="info">
-        <?php echo nl2br($info_message); ?>
-    </div>
 </div>
 <div class="main">
     <div id="area_map" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">

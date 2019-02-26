@@ -12,9 +12,6 @@ defined('_IPSSP') or die;
             <input type="hidden" name="tab" value="rec" />
         </form>
     </div>
-    <div class="info">
-        <?php echo nl2br($info_message); ?>
-    </div>
 </div>
 <div class="main">
     <div class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">

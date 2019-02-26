@@ -52,9 +52,6 @@ defined('_IPSSP') or die;
         </form>
 <?php endif; ?>
     </div>
-    <div class="info">
-        <?php echo nl2br($info_message); ?>
-    </div>
 </div>
 <div class="main" >
     <div id="positions" class="map" style="background-image:url('<?php echo $mapfile; ?>'); width:<?php echo $imagesize[0]; ?>px; height:<?php echo $imagesize[1]; ?>px;">

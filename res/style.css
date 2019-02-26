@@ -18,6 +18,12 @@ body {
     z-index: 1;
 }
 
+.sidebar {
+    background-color: #666666;
+    border: 2px solid;
+    border-color: black;
+}
+
 .left {
     width: 200px;
     background-color: #666666;

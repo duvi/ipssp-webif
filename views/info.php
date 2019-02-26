@@ -16,9 +16,6 @@ defined('_IPSSP') or die;
         </form>
         <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; get_stations();" value="Refresh"/><br><br>
     </div>
-    <div class="info">
-        <?php echo nl2br($info_message); ?>
-    </div>
 </div>
 <div class="main">
     <div id="info_message" class="message">
