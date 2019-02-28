@@ -113,6 +113,10 @@ function clearCanvas(name) {
     ctx.clearRect (0, 0, canvas.width, canvas.height);
 }
 
+function clearAreas(name) {
+    $(document.getElementById(name).getElementsByClassName("area")).attr("fill-opacity","0");
+}
+
 function locate() {
     var canvas = document.getElementById("locate_canvas");
     var ctx = canvas.getContext("2d");
@@ -123,7 +127,7 @@ function locate() {
     document.getElementById("locate_punkt").innerHTML = "";
     document.getElementById("locate_message").innerHTML = "";
     ctx.clearRect (0, 0, canvas.width, canvas.height);
-    $(document.getElementById("locate_svg").getElementsByClassName("area")).attr("fill-opacity","0");
+    clearAreas("locate_svg");
 
     if (!document.locate_form.command || !stations.length) {
         document.getElementById("locate_message").innerHTML = "Station or command list empty";
