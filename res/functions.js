@@ -245,11 +245,11 @@ function show_all() {
     });
 }
 
-function show_sta(station) {
+function show_station(station) {
     $.ajax({
-        url: "res/show_sta.php",
+        url: "models/stations.php",
         type: "POST",
-        data: ({sta: station}),
+        data: ({command: "show_station", station: station}),
         dataType: "json",
         success: function(data) {
             document.getElementById("info_message").innerHTML = data.message;
@@ -341,6 +341,6 @@ function get_stations() {
 $(document).ready(function(){
     $(document.info_form).on('change', 'input', function(){
         document.getElementById('info_message').innerHTML = 'Loading...';
-        show_sta($(this).val());
+        show_station($(this).val());
     });
 });
