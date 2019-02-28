@@ -12,9 +12,6 @@ $message = "";
 $info_message = "";
 $posnum = "";
 $mapname = "";
-$stations = array();
-$stations_select = "";
-$stations_select_rec = "";
 $positions = array();
 $positions_select = "";
 $monitors = array();
@@ -110,16 +107,6 @@ $info_message .= "Your MAC: " . $mac . "\n";
 $info_message .= "Your IP: " . $ip . "\n";
 $posnum = get_num_pos();
 $mapname = get_map_name();
-$stations = get_stations();
-
-if (isset($_POST['sta'])) {
-    $stations_select = print_stations($stations, $_POST['sta'], 0);
-    $stations_select_rec = print_stations($stations, $_POST['sta'], 1);
-}
-else {
-    $stations_select = print_stations($stations, $mac, 0);
-    $stations_select_rec = print_stations($stations, $mac, 1);
-}
 
 $positions = get_positions();
 $positions_select = print_positions($positions, $posname);

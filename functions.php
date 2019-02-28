@@ -2,35 +2,6 @@
 
 include('res/db.php');
 
-function get_stations() {
-    global $info_message;
-
-    $sql = "SELECT sta_id, record, r, g, b
-            FROM station_list
-            WHERE time_last > DATE_SUB(NOW(), INTERVAL 30 SECOND)
-            ORDER BY time_last DESC";
-
-    $result = db_select($sql);
-    if (!$result) {
-        $info_message .= "Station list not received.\n";
-    }
-
-    $i = 0;
-    $rows = array();
-    while ($row = mysqli_fetch_array($result)) {
-        $rows[$i]["mac"] = $row["sta_id"];
-        $rows[$i]["rec"] = $row["record"];
-        $rows[$i]["r"] = $row["r"];
-        $rows[$i]["g"] = $row["g"];
-        $rows[$i]["b"] = $row["b"];
-        $i++;
-    }
-
-    mysqli_free_result($result);
-
-    return $rows;
-}
-
 function get_monitors() {
     global $info_message;
 
@@ -107,32 +78,6 @@ function get_positions() {
     mysqli_free_result($result);
 
     return $rows;
-}
-
-function print_stations($stations, $sta, $rec) {
-    include('res/config.php');
-    global $info_message;
-    $result = "";
-
-    if ($stations) {
-        foreach($stations as $station) {
-            $result .= '<label><input type="radio" name="sta" value="' . $station["mac"];
-            if ($rec) {
-                $result .= ' ' . $station["rec"];
-            }
-            $result .= '"';
-            if (!strncmp($station["mac"], str_replace(":", "", $sta), 12)) {
-                $result .= ' CHECKED';
-            }
-            $result .= ' />' . $station["mac"];
-            if ($rec) {
-                $result .= ' ' . $station["rec"];
-            }
-            $result .= '</label><br />';
-        }
-    }
-
-    return $result;
 }
 
 function print_positions($positions, $pos) {
