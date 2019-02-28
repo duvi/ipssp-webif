@@ -223,18 +223,6 @@ function compare2(command, station) {
     setTimeout("compare2(command2, station2);", 1000);
 }
 
-function show_positions() {
-    $.ajax({
-        url: "models/positions.php",
-        type: "POST",
-        data: ({command: "show_position"}),
-        dataType: "json",
-        success: function(data) {
-            document.getElementById("pos_message").innerHTML = data.message;
-        }
-    });
-}
-
 function show_stations() {
     $.ajax({
         url: "models/stations.php",
@@ -255,6 +243,18 @@ function show_station(station) {
         dataType: "json",
         success: function(data) {
             document.getElementById("info_message").innerHTML = data.message;
+        }
+    });
+}
+
+function show_positions() {
+    $.ajax({
+        url: "models/positions.php",
+        type: "POST",
+        data: ({command: "show_position"}),
+        dataType: "json",
+        success: function(data) {
+            document.getElementById("pos_message").innerHTML = data.message;
         }
     });
 }
