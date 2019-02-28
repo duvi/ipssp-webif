@@ -14,7 +14,8 @@ switch ($command) {
         get_stations();
         break;
     case "show_station":
-        show_station();
+        $station = isset($_POST['station']) ? $_POST['station'] : '';
+        show_station($station);
         break;
 }
 
@@ -48,19 +49,13 @@ function get_stations() {
     echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
 }
 
-function show_station() {
+function show_station($station) {
     $message = "";
 
-    if ($_POST && isset($_POST['station'])) {
-        $station = $_POST['station'];
-    }
-    else {
-        return;
-    }
-
     $sql = "SELECT `sta_id`, `channel`
-            FROM `station_list`
-            WHERE `sta_id` = '" . $station . "'";
+            FROM `station_list`";
+    if ($station) $sql .= " WHERE `sta_id` = '" . $station . "'";
+    $sql .= " ORDER BY `time_last` DESC";
 
     $result = db_select($sql);
     if (!$result)
@@ -68,7 +63,7 @@ function show_station() {
         $message .= "Station not received.\n";
     }
 
-    if ($row = mysqli_fetch_array($result))
+    while ($row = mysqli_fetch_array($result))
         {
         $message .= "STATION: " . $row['sta_id'] . " CHANNEL: " . $row['channel'] . " \n";
 
@@ -76,7 +71,7 @@ function show_station() {
                             FROM `station_data`
                             LEFT JOIN `monitor_list`
                             ON `station_data`.`mon_id` = `monitor_list`.`mon_id`
-                            WHERE `station_data`.`sta_id` = '" . $station . "'";
+                            WHERE `station_data`.`sta_id` = '" . $row['sta_id'] . "'";
 
         $result2 = db_select($sql);
 

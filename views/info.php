@@ -7,7 +7,7 @@ defined('_IPSSP') or die;
     <div class="forms">
         <form target="_parent" method="post">
             Show all station info:
-            <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; show_all();" value="Show"/> <br>
+            <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; show_stations();" value="Show"/> <br>
             Show all position info:
             <input type="button" onClick="document.getElementById('info_message').innerHTML = 'Loading...'; list_pos();" value="Show"/> <br>
         </form>

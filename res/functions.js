@@ -234,10 +234,11 @@ function list_pos() {
     });
 }
 
-function show_all() {
+function show_stations() {
     $.ajax({
-        url: "res/show_all.php",
+        url: "models/stations.php",
         type: "POST",
+        data: ({command: "show_station"}),
         dataType: "json",
         success: function(data) {
             document.getElementById("info_message").innerHTML = data.message;
