@@ -6,6 +6,10 @@ defined('_IPSSP') or die;
 <div class="left">
     <div class="forms">
         <form target="_parent" method="post">
+            Show all position info:
+            <input type="button" onClick="document.getElementById('pos_message').innerHTML = 'Loading...'; show_positions();" value="Show"/> <br>
+        </form>
+        <form target="_parent" method="post">
             Load positions<br>
             <input type="hidden" name="command" value="load_sql" />
             Session:

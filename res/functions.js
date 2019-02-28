@@ -223,13 +223,13 @@ function compare2(command, station) {
     setTimeout("compare2(command2, station2);", 1000);
 }
 
-function list_pos() {
+function show_positions() {
     $.ajax({
         url: "res/list_pos.php",
         type: "POST",
         dataType: "json",
         success: function(data) {
-            document.getElementById("info_message").innerHTML = data.message;
+            document.getElementById("pos_message").innerHTML = data.message;
         }
     });
 }
