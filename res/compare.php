@@ -1,6 +1,7 @@
 <?php
 
 require_once('config.php');
+require_once('../functions.php');
 
 $sql = "";
 $connection;
@@ -15,6 +16,36 @@ $limit = "";
 $sta_r = "";
 $sta_g = "";
 $sta_b = "";
+$area_id = "";
+$areas = get_areas();
+
+function contains($point, $polygon) {
+    if($polygon[0] != $polygon[count($polygon)-1])
+        $polygon[count($polygon)] = $polygon[0];
+    $j = 0;
+    $oddNodes = false;
+    $x = $point[1];
+    $y = $point[0];
+    $n = count($polygon);
+    for ($i = 0; $i < $n; $i++)
+    {
+        $j++;
+        if ($j == $n)
+        {
+            $j = 0;
+        }
+        if ((($polygon[$i][0] < $y) && ($polygon[$j][0] >= $y)) || (($polygon[$j][0] < $y) && ($polygon[$i][0] >=
+            $y)))
+        {
+            if ($polygon[$i][1] + ($y - $polygon[$i][0]) / ($polygon[$j][0] - $polygon[$i][0]) * ($polygon[$j][1] -
+                $polygon[$i][1]) < $x)
+            {
+                $oddNodes = !$oddNodes;
+            }
+        }
+    }
+    return $oddNodes;
+}
 
 function distance($x1, $y1, $x2, $y2) {
     global $message;
@@ -250,6 +281,14 @@ $message .= "Final-position: " . $pos_x . " " . $pos_y . " Limit: " . $limit . "
 mysqli_free_result($result);
 mysqli_close($connection);
 
-echo json_encode(array('x'=>$pos_x,'y'=>$pos_y,'r'=>$sta_r,'g'=>$sta_g,'b'=>$sta_b,'message'=>nl2br($message)));
+foreach ($areas as $area) {
+    if (contains(array($pos_x, $pos_y), $area["polygon"])) {
+        $area_id = $area["id"];
+        $message .= "Area: " . $area["name"] . "\n";
+        break;
+    }
+}
+
+echo json_encode(array('x'=>$pos_x,'y'=>$pos_y,'r'=>$sta_r,'g'=>$sta_g,'b'=>$sta_b,'area_id'=>$area_id,'message'=>nl2br($message)));
 
 ?>
