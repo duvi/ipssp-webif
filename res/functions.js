@@ -325,10 +325,12 @@ function get_stations() {
             document.getElementById("sidebar_message").innerHTML = data.message;
             document.info_form.querySelector('.stations').innerHTML = '';
             document.locate_form.querySelector('.stations').innerHTML = '';
+            document.record_form.querySelector('.stations').innerHTML = '';
             document.compare_form.querySelector('.stations').innerHTML = '';
             $.each(data.result, function(i, item) {
                 document.info_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
                 document.locate_form.querySelector('.stations').innerHTML += '<label><input type="checkbox" name="sta" value="' + item.sta_id + '"' + (locate_stations[item.sta_id] ? ' checked' : '') + '><span class="user_punkt" style="background-color:rgb(' + item.r + ',' + item.g + ',' + item.b + ');"></span>' + item.sta_id + '</label>';
+                document.record_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + ' ' + item.record + '">' + item.sta_id + ' ' + item.record + '</label>';
                 document.compare_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
             });
         }

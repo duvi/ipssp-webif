@@ -29,9 +29,8 @@ defined('_IPSSP') or die;
         Select recording stations<br>
         0: recorded<br>
         1: not recorded<br><br>
-        <form target="_parent" method="post">
-            <?php echo $stations_select_rec; ?>
-            <br>
+        <form name="record_form" target="_parent" method="post">
+            <div class="stations"></div>
             <input type="submit" name="command" value="record_sta" /> <br>
             <input type="hidden" name="tab" value="rec" />
         </form>
