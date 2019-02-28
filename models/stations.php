@@ -39,10 +39,9 @@ function get_stations() {
     }
 
     $rows = array();
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-        {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $rows[] = $row;
-        }
+    }
 
     mysqli_free_result($result);
 
@@ -58,13 +57,14 @@ function show_station($station) {
     $sql .= " ORDER BY `time_last` DESC";
 
     $result = db_select($sql);
-    if (!$result)
-    {
+    if (!$result) {
         $message .= "Station not received.\n";
     }
+    elseif ($result->num_rows == 0) {
+        $message .= "Station(s) not found in database.\n";
+    }
 
-    while ($row = mysqli_fetch_array($result))
-        {
+    while ($row = mysqli_fetch_array($result)) {
         $message .= "STATION: " . $row['sta_id'] . " CHANNEL: " . $row['channel'] . " \n";
 
         $sql = "SELECT `monitor_list`.`name`, `station_data`.`signal`, `station_data`.`time_rcv`
@@ -75,12 +75,11 @@ function show_station($station) {
 
         $result2 = db_select($sql);
 
-        while ($row2 = mysqli_fetch_array($result2))
-            {
+        while ($row2 = mysqli_fetch_array($result2)) {
             $message .= "MONITOR: " . $row2['name'] . " SIGNAL: -" . $row2['signal'] . " dBm  TIME: " . $row2['time_rcv'] . " \n";
-            }
-        mysqli_free_result($result2);
         }
+        mysqli_free_result($result2);
+    }
 
     mysqli_free_result($result);
 
