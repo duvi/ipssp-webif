@@ -1,8 +1,22 @@
 <?php
 
-require_once('db.php');
+if ($_POST && isset($_POST['command'])) {
+    $command = $_POST['command'];
+}
+else {
+    return;
+}
 
-$message = "";
+require_once('../res/db.php');
+
+switch ($command) {
+    case "get_stations":
+        get_stations();
+        break;
+}
+
+function get_stations() {
+    $message = "";
 
     $sql = "SELECT `sta_id`, `record`, `r`, `g`, `b`
             FROM `station_list`
@@ -29,5 +43,6 @@ $message = "";
     mysqli_free_result($result);
 
     echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+}
 
 ?>

@@ -318,8 +318,9 @@ function get_stations() {
     }
 
     $.ajax({
-        url: "res/get_stations.php",
+        url: "models/stations.php",
         type: "POST",
+        data: ({command: "get_stations"}),
         dataType: "json",
         success: function(data) {
             document.getElementById("sidebar_message").innerHTML = data.message;
