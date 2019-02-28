@@ -225,8 +225,9 @@ function compare2(command, station) {
 
 function show_positions() {
     $.ajax({
-        url: "res/list_pos.php",
+        url: "models/positions.php",
         type: "POST",
+        data: ({command: "show_position"}),
         dataType: "json",
         success: function(data) {
             document.getElementById("pos_message").innerHTML = data.message;
@@ -258,11 +259,11 @@ function show_station(station) {
     });
 }
 
-function show_pos(position) {
+function show_position(position) {
     $.ajax({
-        url: "res/show_pos.php",
+        url: "models/positions.php",
         type: "POST",
-        data: ({pos: position}),
+        data: ({command: "show_position", position: position}),
         dataType: "json",
         success: function(data) {
             document.pos_form.pos.value = position;
