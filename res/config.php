@@ -1,5 +1,12 @@
 <?php
 
+//Router SSH adatok
+$ssh_host = "192.168.200.2";
+$ssh_port = 22;
+$ssh_user = "root";
+$ssh_pass = "duvika";
+$ssh_comm = "cat /proc/net/arp";
+
 $server_ip = '127.0.0.1';
 $out_port = 5950;
 $in_port = rand(10000, 65530);

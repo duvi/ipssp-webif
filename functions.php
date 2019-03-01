@@ -205,7 +205,7 @@ function get_maps() {
     return $result;
 }
 
-function get_mac() {
+function get_mac($ssh_host,$ssh_port,$ssh_user,$ssh_pass,$ssh_comm) {
     $ipFound = FALSE;
     // This code is under the GNU Public Licence
     // Written by michael_stankiewicz {don't spam} at yahoo {no spam} dot com
@@ -220,7 +220,13 @@ function get_mac() {
 
     // Execute the arp command and store the output in $arpTable
     // $arpTable = `$location`;
-    $arpTable = `/sbin/arp -n`;
+    // $arpTable = `/sbin/arp -n`;
+    $connection = ssh2_connect($ssh_host, $ssh_port);
+    ssh2_auth_password($connection, $ssh_user, $ssh_pass);
+    $stream = ssh2_exec($connection, $ssh_comm);
+    stream_set_blocking($stream, true);
+    $out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
+    $arpTable = stream_get_contents($out);
 
     // Split the output so every line is an entry of the $arpSplitted array
     $arpSplitted = explode("\n",$arpTable);

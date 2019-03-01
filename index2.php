@@ -17,7 +17,7 @@ else {
 }
 
 
-$mac = get_mac();
+$mac = get_mac($ssh_host,$ssh_port,$ssh_user,$ssh_pass,$ssh_comm);
 $ip = $_SERVER['REMOTE_ADDR'];
 
 ?>
