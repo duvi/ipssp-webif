@@ -1,7 +1,7 @@
 <?php
 
 //Router SSH adatok
-$ssh_host = "192.168.200.2";
+$ssh_host = "192.168.200.5";
 $ssh_port = 22;
 $ssh_user = "root";
 $ssh_pass = "duvika";
