@@ -13,14 +13,14 @@ function point_it(event) {
 function blink() {
     var e = document.getElementById("blink_img");
     e.style.visibility = ( e.style.visibility == 'visible' )? 'hidden' : 'visible';
-    setTimeout("blink();", 500);
+    setTimeout(blink, 500);
  }
 
 function seconds() {
     var e = document.getElementById('seconds');
     var value = parseInt(e.textContent) + 1;
     e.innerHTML = value;
-    setTimeout("seconds();", 1000);
+    setTimeout(seconds, 1000);
 }
 
 function navigate(pos_x, pos_y) {
@@ -104,7 +104,7 @@ function drawpark() {
         }
     });
 
-    park_timer = setTimeout("drawpark()", 3000);
+    park_timer = setTimeout(drawpark, 3000);
 }
 
 function clearCanvas(name) {
@@ -131,7 +131,7 @@ function locate() {
 
     if (!document.locate_form.command || !stations.length) {
         document.getElementById("locate_message").innerHTML = "Station or command list empty";
-        locate_timer = setTimeout("locate()", 1000);
+        locate_timer = setTimeout(locate, 1000);
         return;
     }
 
@@ -169,7 +169,7 @@ function locate() {
         }
     }
 
-    locate_timer = setTimeout("locate()", 1000);
+    locate_timer = setTimeout(locate, 1000);
 }
 
 function locate2(command, station, area_id) {
@@ -231,7 +231,7 @@ function compare(){
         drawpath();
     }
 
-    compare_timer = setTimeout("compare()", 1000);
+    compare_timer = setTimeout(compare, 1000);
 }
 
 function compare2(command, station) {
@@ -254,10 +254,7 @@ function compare2(command, station) {
         drawpath();
     }
 
-    command2 = command;
-    station2 = station;
-
-    setTimeout("compare2(command2, station2);", 1000);
+    setTimeout(compare2, 1000, command, station);
 }
 
 function show_stations() {
