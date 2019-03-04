@@ -172,6 +172,31 @@ function locate() {
     locate_timer = setTimeout("locate()", 1000);
 }
 
+function locate2(command, station, area_id) {
+    $.ajax({
+        url: "res/compare.php",
+        type: "POST",
+        data: ({command: command, sta: station}),
+        dataType: "json",
+        async: false,
+        success: function(data) {
+            document.getElementById("compare_punkt").style.left = data.x-5 + "px";
+            document.getElementById("compare_punkt").style.top = data.y-5 + "px";
+            document.getElementById("compare_punkt").style.visibility = "visible";
+            document.getElementById("compare_message").innerHTML = command + " " + station + ": " + data.message;
+            if (data.area_id != area_id) {
+                clearAreas("locate_svg");
+                area_id = data.area_id;
+                var area = document.getElementById("area-" + data.area_id);
+                area.setAttribute("fill-opacity","0.6");
+                area.setAttribute("fill","rgb("+data.r+","+data.g+","+data.b+")");
+            }
+        }
+    });
+
+    setTimeout(locate2, 1000, command, station, area_id);
+}
+
 function compare(){
     for (var i=0; i < document.compare_form.command.length; i++) {
         if (document.compare_form.command[i].checked) {

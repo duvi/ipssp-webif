@@ -88,3 +88,8 @@ body {
     padding: 2px;
     position: absolute;
 }
+
+#navigate_map #locate_svg polygon {
+    -webkit-transition: fill-opacity 0.5s;
+    transition: fill-opacity 0.5s;
+}
