@@ -23,50 +23,6 @@ function seconds() {
     setTimeout(seconds, 1000);
 }
 
-function navigate(pos_x, pos_y) {
-    document.getElementById("navigate_punkt").style.left = (pos_x-5);
-    document.getElementById("navigate_punkt").style.top = (pos_y-5);
-    document.getElementById("navigate_punkt").style.visibility = "visible";
-    if (document.getElementById("navigate_text")) {
-        document.getElementById("navigate_text").style.visibility = "hidden";
-    }
-
-    dest_x = pos_x;
-    dest_y = pos_y;
-
-    if (src_x && src_y) {
-        drawpath();
-    }
-}
-
-function drawpath() {
-    var canvas = document.getElementById("navigate_canvas");
-
-    if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-
-        ctx.clearRect (0, 0, 623, 379);
-        ctx.lineWidth = 8;
-        ctx.strokeStyle = "#0000ff";
-        ctx.beginPath();
-
-        $.ajax({
-            url: "res/path2.php",
-            type: "POST",
-            data: ({sx: src_x, sy: src_y, tx: dest_x, ty: dest_y}),
-            dataType: "json",
-            success: function(data) {
-                ctx.moveTo(src_x,src_y);
-                $.each(data, function(i, item) {
-                    ctx.lineTo(item.x,item.y);
-                });
-                ctx.lineTo(dest_x,dest_y);
-                ctx.stroke();
-            }
-        });
-    }
-}
-
 function clearCanvas(name) {
     var canvas = document.getElementById(name);
     var ctx = canvas.getContext("2d");
@@ -155,66 +111,6 @@ function locate2(command, station, area_id) {
     });
 
     setTimeout(locate2, 1000, command, station, area_id);
-}
-
-function compare(){
-    for (var i=0; i < document.compare_form.command.length; i++) {
-        if (document.compare_form.command[i].checked) {
-            var command = document.compare_form.command[i].value;
-        }
-    }
-
-    for (var j=0; j < document.compare_form.sta.length; j++) {
-        if (document.compare_form.sta[j].checked) {
-            var station = document.compare_form.sta[j].value;
-        }
-    }
-
-    $.ajax({
-        url: "res/compare.php",
-        type: "POST",
-        data: ({command: command, sta: station}),
-        dataType: "json",
-        success: function(data) {
-            if (data.x) {
-                document.getElementById("compare_punkt").style.left = data.x-5 + "px";
-                document.getElementById("compare_punkt").style.top = data.y-5 + "px";
-                document.getElementById("compare_punkt").style.visibility = "visible";
-                src_x = data.x;
-                src_y = data.y;
-            }
-            document.getElementById("compare_message").innerHTML = command + " " + station + "<br>" + data.message;
-        }
-    });
-
-    if (src_x && src_y && dest_x && dest_y) {
-        drawpath();
-    }
-
-    compare_timer = setTimeout(compare, 1000);
-}
-
-function compare2(command, station) {
-    $.ajax({
-        url: "res/compare.php",
-        type: "POST",
-        data: ({command: command, sta: station}),
-        dataType: "json",
-        success: function(data) {
-            document.getElementById("compare_punkt").style.left = data.x-5 + "px";
-                document.getElementById("compare_punkt").style.top = data.y-5 + "px";
-                document.getElementById("compare_punkt").style.visibility = "visible";
-                document.getElementById("compare_message").innerHTML = command + " " + station + ": " + data.message;
-                src_x = data.x;
-                src_y = data.y;
-        }
-    });
-
-    if (dest_x && dest_y) {
-        drawpath();
-    }
-
-    setTimeout(compare2, 1000, command, station);
 }
 
 function show_stations() {
@@ -325,13 +221,11 @@ function get_stations() {
             document.locate_form.querySelector('.stations').innerHTML = '';
             document.locate_form.station.innerHTML = '<option>Select station</option>';
             document.record_form.querySelector('.stations').innerHTML = '';
-            document.compare_form.querySelector('.stations').innerHTML = '';
             $.each(data.result, function(i, item) {
                 document.info_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
                 document.locate_form.querySelector('.stations').innerHTML += '<label><input type="checkbox" name="sta" value="' + item.sta_id + '"' + (locate_stations[item.sta_id] ? ' checked' : '') + ' class="item"><span class="user_punkt" style="background-color:rgb(' + item.r + ',' + item.g + ',' + item.b + ');"></span>' + item.sta_id + '</label>';
                 document.locate_form.station.innerHTML += '<option value="' + item.sta_id + '"' + (station_select == item.sta_id ? ' selected' : '') + '>' + item.sta_id + '</option>';
                 document.record_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + ' ' + item.record + '">' + item.sta_id + ' ' + item.record + '</label>';
-                document.compare_form.querySelector('.stations').innerHTML += '<label><input type="radio" name="sta" value="' + item.sta_id + '">' + item.sta_id + '</label>';
             });
         }
     });

@@ -156,7 +156,6 @@ $areas = get_areas();
                     <a class="nav-item nav-link <?php echo (($tab == 'rec') ? ' show active' : ''); ?>" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-rec" aria-selected="false">Record</a>
                     <a class="nav-item nav-link" id="nav-area-tab" data-toggle="tab" href="#nav-area" role="tab" aria-controls="nav-area" aria-selected="false">Areas</a>
                     <a class="nav-item nav-link" id="nav-loc-tab" data-toggle="tab" href="#nav-loc" role="tab" aria-controls="nav-loc" aria-selected="false">Locate</a>
-                    <a class="nav-item nav-link" id="nav-nav-tab" data-toggle="tab" href="#nav-nav" role="tab" aria-controls="nav-nav" aria-selected="false">Navigate</a>
                     <?php endif; ?>
                 </div>
             </nav>
@@ -204,11 +203,6 @@ $areas = get_areas();
                             <div class="tab-pane fade" id="nav-loc" role="tabpanel" aria-labelledby="nav-loc-tab">
                         ');
                         include_once('views/locate.php');
-                        echo ('
-                            </div>
-                            <div class="tab-pane fade" id="nav-nav" role="tabpanel" aria-labelledby="nav-nav-tab">
-                        ');
-                        include_once('views/navigate.php');
                         echo ('
                             </div>
                         ');
