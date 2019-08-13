@@ -162,14 +162,14 @@ function show_position(position) {
     });
 }
 
-function show_mon(monitor) {
+function show_monitor(monitor) {
     $.ajax({
-        url: "res/show_mon.php",
+        url: "models/monitors.php",
         type: "POST",
-        data: ({mon: monitor}),
+        data: ({command: "show_monitor", monitor: monitor}),
         dataType: "json",
         success: function(data) {
-//            document.getElementById("mon_message").innerHTML = data.message;
+            document.getElementById("mon_message").innerHTML = data.message;
             document.getElementById("mon_punkt").innerHTML = "";
 
             var images = document.getElementById("monitors").getElementsByTagName("img");
@@ -178,7 +178,6 @@ function show_mon(monitor) {
             }
             document.getElementById(monitor).style.opacity = 1;
             $.each(data.result, function(i, item) {
-//                document.getElementById("mon_punkt").innerHTML += '<img src="img/rotpunkt.png" title="' +  item.signal + '" style="position:absolute;float:none;z-index:1;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;"><br>';
                 document.getElementById("mon_punkt").innerHTML += '<div style="left:' + (item.x-7) + 'px;top:' + (item.y-10) + 'px;">' +  item.signal + '</div>';
             });
         }
