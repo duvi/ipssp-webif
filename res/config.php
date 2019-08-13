@@ -17,9 +17,9 @@ $logfile = "logs/position.log";
 
 //Adatbazis parameterek
 $db_host = "localhost";
-$db_user = "iparking";
-$db_pass = "1p4rk1n6";
-$db_name = "iparking";
+$db_user = "ipssp";
+$db_pass = "CExnpCD0IenDzppC";
+$db_name = "ipssp";
 
 //Kozelito algoritmus parameterek
 $top = 400;
