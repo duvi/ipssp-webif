@@ -29,9 +29,6 @@ defined('_IPSSP') or die;
         <img src="img/rotpunkt.png" id="navigate_punkt" style="position:absolute;visibility:hidden;z-index:2;">
         <div id="nav_punkt"> </div>
     </div>
-    <script>
-        //drawpark();
-    </script>
     <div id="compare_message" class="message">
         <?php echo nl2br($message); ?>
     </div>

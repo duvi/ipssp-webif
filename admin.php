@@ -153,7 +153,6 @@ $areas = get_areas();
                     <a class="nav-item nav-link <?php echo (($tab == '') ? ' show active' : ''); ?>" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Info</a>
                     <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monitor</a>
                     <a class="nav-item nav-link <?php echo (($tab == 'pos') ? ' show active' : ''); ?>" id="nav-pos-tab" data-toggle="tab" href="#nav-pos" role="tab" aria-controls="nav-pos" aria-selected="false">Position</a>
-                    <a class="nav-item nav-link disabled" id="nav-park-tab" data-toggle="tab" href="#nav-park" role="tab" aria-controls="nav-park" aria-selected="false">Park</a>
                     <a class="nav-item nav-link <?php echo (($tab == 'rec') ? ' show active' : ''); ?>" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-rec" aria-selected="false">Record</a>
                     <a class="nav-item nav-link" id="nav-area-tab" data-toggle="tab" href="#nav-area" role="tab" aria-controls="nav-area" aria-selected="false">Areas</a>
                     <a class="nav-item nav-link" id="nav-loc-tab" data-toggle="tab" href="#nav-loc" role="tab" aria-controls="nav-loc" aria-selected="false">Locate</a>
@@ -190,11 +189,6 @@ $areas = get_areas();
                             <div class="tab-pane fade' . (($tab == "pos") ? " show active" : "") . '" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
                         ');
                         include_once('views/position.php');
-                        echo ('
-                            </div>
-                            <div class="tab-pane fade" id="nav-park" role="tabpanel" aria-labelledby="nav-park-tab">
-                        ');
-                        include_once('views/park.php');
                         echo ('
                             </div>
                             <div class="tab-pane fade' . (($tab == "rec") ? " show active" : "") . '" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">

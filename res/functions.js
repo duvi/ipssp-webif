@@ -67,46 +67,6 @@ function drawpath() {
     }
 }
 
-function change_park(park_id,status) {
-    $.ajax({
-        url: "res/set_park.php",
-        type: "POST",
-        data: ({park_id: park_id, free: status}),
-        dataType: "json",
-        success: function(data) {
-            document.getElementById("park_message").innerHTML = data.message;
-        }
-    });
-}
-
-function drawpark() {
-    $.ajax({
-        url: "res/get_park.php",
-        dataType: "json",
-        success: function(data) {
-            document.getElementById("nav_punkt").innerHTML = "";
-            document.getElementById("park_map").innerHTML = "";
-            document.getElementById("park_message").innerHTML = "";
-            $.each(data.result, function(i, item) {
-                if (item.free == 0) {
-                    document.getElementById("nav_punkt").innerHTML += '<img src="img/rotpunkt.png" title="' +  item.park_id + '" style="position:absolute;float:none;z-index:1;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;">';
-                    document.getElementById("park_map").innerHTML += '<img src="img/rotpunkt.png" onclick="change_park(' + item.park_id + ',1)" title="' +  item.park_id + '" style="position:absolute;float:none;z-index:1;cursor:pointer;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;">';
-                }
-                else if (item.free == 1) {
-                    document.getElementById("nav_punkt").innerHTML += '<img src="img/gruenerpunkt.png" onclick="navigate(' + item.x + ',' + item.y +')" title="' +  item.park_id + '" style="position:absolute;float:none;z-index:1;cursor:pointer;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;">';
-                    document.getElementById("park_map").innerHTML += '<img src="img/gruenerpunkt.png" onclick="change_park(' + item.park_id + ',2)" title="' +  item.park_id + '" style="position:absolute;float:none;z-index:1;cursor:pointer;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;">';
-                }
-                else {
-                    document.getElementById("nav_punkt").innerHTML += '<img src="img/blaupunkt.png" title="' +  item.park_id + '" style="position:absolute;float:none;z-index:1;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;">';
-                    document.getElementById("park_map").innerHTML += '<img src="img/blaupunkt.png" onclick="change_park(' + item.park_id + ',0)" title="' +  item.park_id + '" style="position:absolute;float:none;z-index:1;cursor:pointer;left:' + (item.x-5) + 'px;top:' + (item.y-5) + 'px;">';
-                }
-            });
-        }
-    });
-
-    park_timer = setTimeout(drawpark, 3000);
-}
-
 function clearCanvas(name) {
     var canvas = document.getElementById(name);
     var ctx = canvas.getContext("2d");
