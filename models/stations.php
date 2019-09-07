@@ -67,10 +67,10 @@ function show_station($station) {
     while ($row = mysqli_fetch_array($result)) {
         $message .= "STATION: " . $row['sta_id'] . " CHANNEL: " . $row['channel'] . " \n";
 
-        $sql = "SELECT `monitor_list`.`name`, `station_data`.`signal`, `station_data`.`time_rcv`
+        $sql = "SELECT IFNULL(`monitor_list`.`name`, `monitor_data`.`ip`) AS name, `station_data`.`signal`, `station_data`.`time_rcv`
                             FROM `station_data`
-                            LEFT JOIN `monitor_list`
-                            ON `station_data`.`mon_id` = `monitor_list`.`mon_id`
+                            LEFT JOIN `monitor_list` ON `station_data`.`mon_id` = `monitor_list`.`mon_id`
+                            LEFT JOIN `monitor_data` ON `station_data`.`mon_id` = `monitor_data`.`mon_id`
                             WHERE `station_data`.`sta_id` = '" . $row['sta_id'] . "'";
 
         $result2 = db_select($sql);
