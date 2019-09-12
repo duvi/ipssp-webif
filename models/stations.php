@@ -4,10 +4,10 @@ if ($_POST && isset($_POST['command'])) {
     $command = $_POST['command'];
 }
 else {
-    return;
+    $command = NULL;
 }
 
-require_once('../res/db.php');
+require_once(__DIR__ . '/../res/db.php');
 
 switch ($command) {
     case "get_stations":
