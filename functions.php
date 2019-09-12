@@ -2,33 +2,6 @@
 
 include('res/db.php');
 
-function get_monitors() {
-    global $info_message;
-
-    $sql = "SELECT mon_id, ip, x, y
-            FROM monitor_list
-            ORDER BY ip";
-
-    $result = db_select($sql);
-    if (!$result) {
-        $info_message .= "Monitor list not received.\n";
-    }
-
-    $i = 0;
-    $rows = array();
-    while ($row = mysqli_fetch_array($result)) {
-        $rows[$i]["mac"] = $row["mon_id"];
-        $rows[$i]["ip"] = $row["ip"];
-        $rows[$i]["x"] = $row["x"];
-        $rows[$i]["y"] = $row["y"];
-        $i++;
-    }
-
-    mysqli_free_result($result);
-
-    return $rows;
-}
-
 function get_areas() {
     global $info_message;
 
