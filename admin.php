@@ -25,6 +25,7 @@ $pos_x = "";
 $pos_y = "";
 
 require_once('functions.php');
+require_once('models/positions.php');
 require_once('models/monitors.php');
 
 if ($imagesize = getimagesize("$mapfile")) {

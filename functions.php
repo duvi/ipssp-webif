@@ -28,31 +28,6 @@ function get_areas() {
     return $rows;
 }
 
-function get_positions() {
-    global $info_message;
-
-    $sql = "SELECT pos_id, x, y
-            FROM position_list";
-
-    $result = db_select($sql);
-    if (!$result) {
-        $info_message .= "Monitor list not received.\n";
-    }
-
-    $i = 0;
-    $rows = array();
-    while ($row = mysqli_fetch_array($result)) {
-        $rows[$i]["name"] = $row["pos_id"];
-        $rows[$i]["x"] = $row["x"];
-        $rows[$i]["y"] = $row["y"];
-        $i++;
-    }
-
-    mysqli_free_result($result);
-
-    return $rows;
-}
-
 function print_positions($positions, $pos) {
     include('res/config.php');
     global $info_message;

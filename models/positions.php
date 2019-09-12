@@ -10,10 +10,46 @@ else {
 require_once(__DIR__ . '/../res/db.php');
 
 switch ($command) {
+    case "get_positions":
+        get_positions();
+        break;
     case "show_position":
         $position = isset($_POST['position']) ? $_POST['position'] : '';
         show_position($position);
         break;
+}
+
+function get_positions() {
+    $message = "";
+
+    $sql = "SELECT `pos_id` AS `name`, `x`, `y`
+            FROM `position_list`";
+
+    $result = db_select($sql);
+    if (!$result) {
+        $info_message .= "Position list not received.\n";
+    }
+
+    elseif ($result->num_rows == 0) {
+        $message .= "No positions are currently available.\n";
+    }
+    else {
+        $message .= $result->num_rows . " positions received.\n";
+    }
+
+    $rows = array();
+    while ($row = mysqli_fetch_array($result)) {
+        $rows[] = $row;
+    }
+
+    mysqli_free_result($result);
+
+    if ($command) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+    else {
+        global $info_message;
+        $info_message .= $message;
+        return $rows;
+    }
 }
 
 function show_position($position) {
