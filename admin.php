@@ -27,6 +27,7 @@ $pos_y = "";
 require_once('functions.php');
 require_once('models/positions.php');
 require_once('models/monitors.php');
+require_once('models/areas.php');
 
 if ($imagesize = getimagesize("$mapfile")) {
     $info_message .= "Map image loaded.\n x=" . $imagesize[0] . "px y=" . $imagesize[1] . "px\n";

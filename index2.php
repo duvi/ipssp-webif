@@ -2,6 +2,7 @@
 
 require_once('res/config.php');
 require_once('functions.php');
+require_once('models/areas.php');
 
 $message = "";
 $info_message = "";

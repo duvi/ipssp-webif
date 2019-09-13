@@ -2,32 +2,6 @@
 
 include('res/db.php');
 
-function get_areas() {
-    global $info_message;
-
-    $sql = "SELECT id, name, polygon
-            FROM area_list
-            ORDER BY id";
-
-    $result = db_select($sql);
-    if (!$result) {
-        $info_message .= "Area list not received.\n";
-    }
-
-    $i = 0;
-    $rows = array();
-    while ($row = mysqli_fetch_array($result)) {
-        $rows[$i]["id"] = $row["id"];
-        $rows[$i]["name"] = $row["name"];
-        $rows[$i]["polygon"] = json_decode($row["polygon"]);
-        $i++;
-    }
-
-    mysqli_free_result($result);
-
-    return $rows;
-}
-
 function print_positions($positions, $pos) {
     include('res/config.php');
     global $info_message;

@@ -2,6 +2,7 @@
 
 require_once('res/config.php');
 require_once('functions.php');
+require_once('models/areas.php');
 
 define('_IPSSP', 1);
 
