@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../res/db.php');
 
 switch ($command) {
     case "get_positions":
-        get_positions();
+        get_positions(TRUE);
         break;
     case "show_position":
         $position = isset($_POST['position']) ? $_POST['position'] : '';
@@ -19,7 +19,7 @@ switch ($command) {
         break;
 }
 
-function get_positions() {
+function get_positions($ajax = FALSE) {
     $message = "";
 
     $sql = "SELECT `pos_id` AS `name`, `x`, `y`
@@ -44,7 +44,7 @@ function get_positions() {
 
     mysqli_free_result($result);
 
-    if ($command) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+    if ($ajax) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
     else {
         global $info_message;
         $info_message .= $message;

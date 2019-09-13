@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../res/db.php');
 
 switch ($command) {
     case "get_stations":
-        get_stations();
+        get_stations(TRUE);
         break;
     case "show_station":
         $station = isset($_POST['station']) ? $_POST['station'] : '';
@@ -19,7 +19,7 @@ switch ($command) {
         break;
 }
 
-function get_stations() {
+function get_stations($ajax = FALSE) {
     $message = "";
 
     $sql = "SELECT `sta_id`, `record`, `r`, `g`, `b`
@@ -45,7 +45,12 @@ function get_stations() {
 
     mysqli_free_result($result);
 
-    echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+    if ($ajax) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+    else {
+        global $info_message;
+        $info_message .= $message;
+        return $rows;
+    }
 }
 
 function show_station($station) {

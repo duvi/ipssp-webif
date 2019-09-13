@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../res/db.php');
 
 switch ($command) {
     case "get_monitors":
-        get_monitors();
+        get_monitors(TRUE);
         break;
     case "show_monitor":
         $monitor = isset($_POST['monitor']) ? $_POST['monitor'] : '';
@@ -19,7 +19,7 @@ switch ($command) {
         break;
 }
 
-function get_monitors() {
+function get_monitors($ajax = FALSE) {
     $message = "";
 
     $sql = "SELECT `mon_id` AS `mac`, `ip`, `x`, `y`
@@ -44,7 +44,7 @@ function get_monitors() {
 
     mysqli_free_result($result);
 
-    if ($command) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+    if ($ajax) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
     else {
         global $info_message;
         $info_message .= $message;
