@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../res/db.php');
 
 switch ($command) {
     case "get_areas":
-        get_area(TRUE);
+        get_areas(TRUE);
         break;
 }
 
