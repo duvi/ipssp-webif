@@ -20,63 +20,66 @@ function print_positions($positions, $pos) {
     return $result;
 }
 
-function get_num_pos() {
+function talk($message) {
     include('res/config.php');
     global $info_message;
-    $result = "";
+    $reply = NULL;
 
     if ($socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP)) {
         socket_bind($socket, $server_ip, $in_port);
-        socket_sendto($socket, "get_num_pos", 11, 0, $server_ip, $out_port);
+        socket_sendto($socket, $message, strlen($message), 0, $server_ip, $out_port);
         socket_set_block($socket);
         socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec"=>$timeout,"usec"=>0));
-        socket_recvfrom($socket, $message_in, 65535, 0, $clientIP, $clientPort);
+        socket_recvfrom($socket, $reply, 65535, 0, $clientIP, $clientPort);
         socket_set_nonblock($socket);
         socket_close($socket);
-
-        list($command_in, $param_in) = sscanf($message_in, "%s %s");
-        switch ($command_in) {
-            case "posnum":
-                list($result) = sscanf($param_in, "%i");
-                $info_message .= "Next position: " . $result . "\n";
-                break;
-            case "":
-                $info_message .= "Next position not received.\n";
-        }
     }
     else {
         $info_message .= "Can't create socket\n";
+    }
+
+    return $reply;
+}
+
+function get_num_pos() {
+    global $info_message;
+    $result = "";
+    $reply = talk("get_num_pos");
+
+    if ($reply) {
+        list($command_in, $param_in) = sscanf($reply, "%s %s");
+        if ($command_in == "posnum") {
+            list($result) = sscanf($param_in, "%i");
+            $info_message .= "Next position: " . $result . "\n";
+        }
+        else {
+            $info_message .= "Next position not received.\n";
+        }
+    }
+    else {
+        $info_message .= "Next position not received.\n";
     }
 
     return $result;
 }
 
 function get_map_name() {
-    include('res/config.php');
     global $info_message;
     $result = "";
+    $reply = talk("get_map_name");
 
-    if ($socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP)) {
-        socket_bind($socket, $server_ip, $in_port);
-        socket_sendto($socket, "get_map_name", 12, 0, $server_ip, $out_port);
-        socket_set_block($socket);
-        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec"=>$timeout,"usec"=>0));
-        socket_recvfrom($socket, $message_in, 65535, 0, $clientIP, $clientPort);
-        socket_set_nonblock($socket);
-        socket_close($socket);
-
-        list($command_in, $param_in) = sscanf($message_in, "%s %s");
-        switch ($command_in) {
-            case "mapname":
-                list($result) = sscanf($param_in, "%s");
-                $info_message .= "Session name: " . $result . "\n";
-                break;
-            case "":
-                $info_message .= "Session name not received.\n";
+    if ($reply) {
+        list($command_in, $param_in) = sscanf($reply, "%s %s");
+        if ($command_in == "mapname") {
+            list($result) = sscanf($param_in, "%s");
+            $info_message .= "Session name: " . $result . "\n";
+        }
+        else {
+            $info_message .= "Session name not received.\n";
         }
     }
     else {
-        $info_message .= "Can't create socket\n";
+        $info_message .= "Session name not received.\n";
     }
 
     return $result;

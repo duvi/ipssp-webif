@@ -65,17 +65,11 @@ if ($_POST && isset($_POST['tab'])) {
 }
 
 if ($command) {
-    if ($socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP)) {
-        $full_command = $command . " " . $param;
-        socket_bind($socket, $server_ip, $in_port);
-        socket_sendto($socket, $full_command, strlen($full_command), 0, $server_ip, $out_port);
-        socket_set_block($socket);
-        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array("sec"=>$timeout,"usec"=>0));
-        socket_recvfrom($socket, $message_in, 65535, 0, $clientIP, $clientPort);
-        socket_set_nonblock($socket);
-        socket_close($socket);
+    $full_command = $command . " " . $param;
+    $reply = talk($full_command);
 
-        list($command_in, $param_in) = sscanf($message_in, "%s %s");
+    if ($reply) {
+        list($command_in, $param_in) = sscanf($reply, "%s %s");
         switch ($command_in) {
             case "done":
                 $message_file = fopen($logfile, "r");
@@ -83,7 +77,7 @@ if ($command) {
                 fclose($message_file);
                 break;
             case "message":
-                $message .= substr($message_in, strlen($command_in));
+                $message .= substr($reply, strlen($command_in));
                 break;
             case "coords":
                 list($pos_x, $pos_y) = sscanf($param_in, "%i,%i");
@@ -97,7 +91,7 @@ if ($command) {
         }
     }
     else {
-        $info_message .= "Can't create socket\n";
+        $info_message .= "Nothing received.\n Check if server is running!\n";
     }
 }
 else {
