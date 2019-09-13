@@ -6,12 +6,13 @@ defined('_IPSSP') or die;
 <div class="left">
     <div class="forms">
         <form target="_parent" method="post">
-            Show all position info:
+            Show all position info:<br>
             <input type="button" onClick="document.getElementById('pos_message').innerHTML = 'Loading...'; show_positions();" value="Show"/> <br>
         </form>
         <form target="_parent" method="post">
             Load positions<br>
             <input type="hidden" name="command" value="load_sql" />
+            <input type="hidden" name="tab" value="pos" />
             Session:
             <select name="mapname" onChange="get_folders();" id="map_select">
                 <?php echo $sessions; ?>
@@ -21,38 +22,42 @@ defined('_IPSSP') or die;
             <select name="macname" id="map_select2">
             </select>
             <br>
-            <input type="submit" value="OK" id="load_pos_ok" style="visibility:hidden;" /> <br>
-            <br>
-            <input type="hidden" name="tab" value="pos" />
+            <input type="submit" value="Load" id="load_pos_ok" style="visibility:hidden;" />
         </form>
-<!--
         <form target="_parent" method="post">
-            Clear positions
+            Clear map<br>
             <input type="hidden" name="command" value="clear_map" />
-            <input type="submit" value="OK" /> <br>
             <input type="hidden" name="tab" value="pos" />
+            <input type="submit" value="Clear" />
         </form>
+<?php if ($maps) : ?>
         <form target="_parent" method="post">
+            Load map<br>
+            <input type="hidden" name="command" value="load_map" />
+            <input type="hidden" name="tab" value="pos" />
             <select name="mapname" >
-            ' . $maps . '
+                <?php echo $maps; ?>
             </select>
-            <input type="submit" name="command" value="load_map" /> <br>
-            <input type="hidden" name="tab" value="pos" />
+            <br>
+            <input type="submit" value="Load" />
         </form>
+<?php endif; ?>
         <form target="_parent" method="post">
-            <input type="text" name="mapname" /> <br>
-            <input type="submit" name="command" value="save_map" /> <br>
+            Save map<br>
+            <input type="hidden" name="command" value="save_map" />
             <input type="hidden" name="tab" value="pos" />
+            <input type="text" name="mapname" />
+            <br>
+            <input type="submit" value="Save" />
         </form>
--->
 <?php if ($positions_select) : ?>
         <form name="pos_form" target="_parent" method="post">
+            Delete position<br>
+            <input type="hidden" name="command" value="del_pos" />
+            <input type="hidden" name="tab" value="pos" />
             <input type="text" name="pos" size="4" />
             <br>
-<!--
-            <input type="submit" name="command" value="del_pos" /> <br>
-            <input type="hidden" name="tab" value="pos" />
--->
+            <input type="submit" value="Delete" />
         </form>
 <?php endif; ?>
     </div>
