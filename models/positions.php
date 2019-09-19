@@ -38,7 +38,7 @@ function get_positions($ajax = FALSE) {
     }
 
     $rows = array();
-    while ($row = mysqli_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $rows[] = $row;
     }
 
@@ -67,7 +67,7 @@ function show_position($position) {
         $message .= "Position(s) not found in database.\n";
     }
 
-    while ($row = mysqli_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $message .= "POSITION: " . $row['pos_id'] . " [" . $row['x'] . "," . $row['y'] . "] TIME: " . $row['time_rec'] . " \n";
 
         $sql = "SELECT `position_data`.`signal`, `position_data`.`mean`, `position_data`.`std_dev`, `monitor_list`.`ip`
@@ -79,7 +79,7 @@ function show_position($position) {
 
         $result2 = db_select($sql);
 
-        while ($row2 = mysqli_fetch_array($result2)) {
+        while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
             $message .= "MON: " . $row2['ip'] . " SIG: -" . $row2['signal'] . " dBm   MEAN: -" . $row2['mean'] . " dBm  DEV: " . $row2['std_dev'] . " \n";
         }
         mysqli_free_result($result2);

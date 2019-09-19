@@ -73,7 +73,7 @@ function show_monitor($monitor) {
     }
 
     $rows = array();
-    while ($row = mysqli_fetch_array($result))
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
         $rows[] = $row;
         }

@@ -35,7 +35,7 @@ function get_areas($ajax = FALSE) {
 
     $i = 0;
     $rows = array();
-    while ($row = mysqli_fetch_array($result)) {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $rows[$i]["id"] = $row["id"];
         $rows[$i]["name"] = $row["name"];
         $rows[$i]["polygon"] = json_decode($row["polygon"]);
