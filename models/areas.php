@@ -20,14 +20,14 @@ switch ($command) {
         break;
     case "show_area":
         $area = isset($_POST['area']) ? $_POST['area'] : '';
-        show_area($area);
+        show_area(TRUE, $area);
         break;
 }
 
 function get_areas($ajax = FALSE) {
     $message = "";
 
-    $sql = "SELECT `id`, `name`, `polygon`, `header`, `image`, `content`
+    $sql = "SELECT `id`, `name`, `polygon`
             FROM `area_list`
             ORDER BY `id`";
 
@@ -48,9 +48,6 @@ function get_areas($ajax = FALSE) {
         $rows[$i]["id"] = $row["id"];
         $rows[$i]["name"] = $row["name"];
         $rows[$i]["polygon"] = json_decode($row["polygon"]);
-        $rows[$i]["header"] = $row["header"];
-        $rows[$i]["image"] = $row["image"];
-        $rows[$i]["content"] = $row["content"];
         $i++;
     }
 
@@ -64,14 +61,13 @@ function get_areas($ajax = FALSE) {
     }
 }
 
-function show_area($area) {
+function show_area($ajax = FALSE, $area = NULL) {
     $message = "";
 
-    if (!$area) $message .= "No area selected.\n";
+    $sql = "SELECT `id`, `name`, `header`, `image`, `content`
+            FROM `area_list`";
 
-    $sql = "SELECT `content`
-            FROM `area_list`
-            WHERE `id` = '" . $area . "'";
+    if ($area) $sql .= " WHERE `id` = '" . $area . "'";
 
     $result = db_select($sql);
     if (!$result) {
@@ -80,16 +76,21 @@ function show_area($area) {
     elseif ($result->num_rows == 0) {
         $message .= "Value(s) not found in database.\n";
     }
+    else {
+        $message .= $result->num_rows . " values received.\n";
+    }
 
     $rows = array();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
+        $rows[] = $row;
         $message .= $row['content'];
         }
 
     mysqli_free_result($result);
 
-    echo json_encode(array('message'=>nl2br($message)));
+    if ($ajax) echo json_encode(array('result'=>$rows,'message'=>nl2br($message)));
+    else return $rows;
 }
 
 ?>

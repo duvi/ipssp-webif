@@ -11,7 +11,7 @@ $info_message = "";
 
 $mac = get_mac($ssh_host,$ssh_port,$ssh_user,$ssh_pass,$ssh_comm);
 $ip = $_SERVER['REMOTE_ADDR'];
-$areas = get_areas();
+$areas = show_area();
 
 if ($imagesize = getimagesize("$mapfile")) {
     $info_message .= "Map image loaded.\n x=" . $imagesize[0] . "px y=" . $imagesize[1] . "px\n";
