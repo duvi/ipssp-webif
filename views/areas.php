@@ -14,7 +14,10 @@ defined('_IPSSP') or die;
     foreach ($area["polygon"] as $poligons) {
         $points .= implode(",", $poligons) . " ";
     }
-    echo '<polygon points="' . $points . '" fill="red" stroke="black" fill-opacity="0.6" />';
+    $onclick = "document.getElementById('area_message').innerHTML = 'Loading...'; show_area(" . $area["id"] . ")";
+    echo '<polygon points="' . $points . '" fill="red" stroke="black" fill-opacity="0.6" onClick="' . $onclick . '">';
+    echo '<title>' . $area["name"] . '</title>';
+    echo '</polygon>';
     ?>
 <?php endforeach; ?>
         </svg>

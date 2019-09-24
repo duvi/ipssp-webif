@@ -18,6 +18,10 @@ switch ($command) {
     case "get_areas":
         get_areas(TRUE);
         break;
+    case "show_area":
+        $area = isset($_POST['area']) ? $_POST['area'] : '';
+        show_area($area);
+        break;
 }
 
 function get_areas($ajax = FALSE) {
@@ -55,6 +59,34 @@ function get_areas($ajax = FALSE) {
         $info_message .= $message;
         return $rows;
     }
+}
+
+function show_area($area) {
+    $message = "";
+
+    if (!$area) $message .= "No area selected.\n";
+
+    $sql = "SELECT `content`
+            FROM `area_list`
+            WHERE `id` = '" . $area . "'";
+
+    $result = db_select($sql);
+    if (!$result) {
+        $message .= "Area data not received.\n";
+    }
+    elseif ($result->num_rows == 0) {
+        $message .= "Value(s) not found in database.\n";
+    }
+
+    $rows = array();
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+        $message .= $row['content'];
+        }
+
+    mysqli_free_result($result);
+
+    echo json_encode(array('message'=>nl2br($message)));
 }
 
 ?>

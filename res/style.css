@@ -93,3 +93,7 @@ body {
     -webkit-transition: fill-opacity 0.5s;
     transition: fill-opacity 0.5s;
 }
+
+#area_map polygon {
+    cursor: pointer;
+}

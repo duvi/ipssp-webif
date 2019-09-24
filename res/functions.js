@@ -184,6 +184,18 @@ function show_monitor(monitor) {
     });
 }
 
+function show_area(area) {
+    $.ajax({
+        url: "models/areas.php",
+        type: "POST",
+        data: ({command: "show_area", area: area}),
+        dataType: "json",
+        success: function(data) {
+            document.getElementById("area_message").innerHTML = data.message;
+        }
+    });
+}
+
 function get_folders() {
     var session = document.getElementById('map_select').value;
     $.ajax({
