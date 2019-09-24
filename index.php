@@ -57,7 +57,7 @@ else {
                     </div>
                     <div class="area-content">
                         <p>A szoftver automatikusan meghatározza az Ön pozícióját az épületen belül, és ennek megfelelően további információval szolgál az éppen látottakról.</p>
-                        <p>A kezdéshez kérjük katintson a START gombra!</p>
+                        <p>A kezdéshez kérjük kattintson a START gombra!</p>
                         <button class="btn btn-primary" id="locate_start" onClick="show_area('comp_diff','<?php echo str_replace(":", "", $mac); ?>',area_id)">START</button>
                     </div>
                 </div>
