@@ -56,7 +56,8 @@ else {
                 </div>
                 <?php foreach ($areas as $area) : ?>
                 <div class="tab-pane fade" id="nav-area_<?php echo $area["id"]; ?>" role="tabpanel" aria-labelledby="nav-area_<?php echo $area["id"]; ?>-tab">
-                    <h2><?php echo $area["name"]; ?></h2>
+                    <div class="area-title"><?php echo $area["name"]; ?></div>
+                    <div class="area-content"><?php echo $area["content"]; ?></div>
                 </div>
                 <?php endforeach; ?>
             </div>

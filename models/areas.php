@@ -27,7 +27,7 @@ switch ($command) {
 function get_areas($ajax = FALSE) {
     $message = "";
 
-    $sql = "SELECT `id`, `name`, `polygon`
+    $sql = "SELECT `id`, `name`, `polygon`, `content`
             FROM `area_list`
             ORDER BY `id`";
 
@@ -48,6 +48,7 @@ function get_areas($ajax = FALSE) {
         $rows[$i]["id"] = $row["id"];
         $rows[$i]["name"] = $row["name"];
         $rows[$i]["polygon"] = json_decode($row["polygon"]);
+        $rows[$i]["content"] = $row["content"];
         $i++;
     }
 
