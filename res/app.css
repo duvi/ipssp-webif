@@ -1,3 +1,25 @@
+img {
+    max-width: 100%;
+    width: 100%;
+}
+
+.header {
+    position: relative;
+}
+
+.header h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    background-color: #000000;
+    opacity: 0.8;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
 .area-title {
     position: fixed;
     right: 0;

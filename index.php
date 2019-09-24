@@ -48,11 +48,16 @@ else {
                 <?php endforeach; ?>
             </div>
         </nav>
-        <div id="maincontent">
+        <div id="maincontent" class="container">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
-                    <h2>Info</h2>
-                    <button class="btn btn-primary" id="locate_start" onClick="show_area('comp_diff','<?php echo str_replace(":", "", $mac); ?>',area_id)">Start</button>
+                    <div class="header">
+                        <img src="img/muzeum.jpg" alt="" />
+                        <h3>Üdvözli a pécsi Csontváry Múzeum!</h3>
+                    </div>
+                    <p>A szoftver automatikusan meghatározza az Ön pozícióját az épületen belül, és ennek megfelelően további információval szolgál az éppen látottakról.</p>
+                    <p>A kezdéshez kérjük katintson a START gombra!</p>
+                    <button class="btn btn-primary" id="locate_start" onClick="show_area('comp_diff','<?php echo str_replace(":", "", $mac); ?>',area_id)">START</button>
                 </div>
                 <?php foreach ($areas as $area) : ?>
                 <div class="tab-pane fade" id="nav-area_<?php echo $area["id"]; ?>" role="tabpanel" aria-labelledby="nav-area_<?php echo $area["id"]; ?>-tab">
