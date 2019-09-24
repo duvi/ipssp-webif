@@ -55,14 +55,20 @@ else {
                         <img src="img/muzeum.jpg" alt="" />
                         <h3>Üdvözli a pécsi Csontváry Múzeum!</h3>
                     </div>
-                    <p>A szoftver automatikusan meghatározza az Ön pozícióját az épületen belül, és ennek megfelelően további információval szolgál az éppen látottakról.</p>
-                    <p>A kezdéshez kérjük katintson a START gombra!</p>
-                    <button class="btn btn-primary" id="locate_start" onClick="show_area('comp_diff','<?php echo str_replace(":", "", $mac); ?>',area_id)">START</button>
+                    <div class="area-content">
+                        <p>A szoftver automatikusan meghatározza az Ön pozícióját az épületen belül, és ennek megfelelően további információval szolgál az éppen látottakról.</p>
+                        <p>A kezdéshez kérjük katintson a START gombra!</p>
+                        <button class="btn btn-primary" id="locate_start" onClick="show_area('comp_diff','<?php echo str_replace(":", "", $mac); ?>',area_id)">START</button>
+                    </div>
                 </div>
                 <?php foreach ($areas as $area) : ?>
                 <div class="tab-pane fade" id="nav-area_<?php echo $area["id"]; ?>" role="tabpanel" aria-labelledby="nav-area_<?php echo $area["id"]; ?>-tab">
-                    <div class="area-title"><?php echo $area["name"]; ?></div>
+                    <div class="header">
+                        <img src="<?php echo $area["image"]; ?>" alt="<?php echo $area["header"]; ?>" />
+                        <h3><?php echo $area["header"]; ?></h3>
+                    </div>
                     <div class="area-content"><?php echo $area["content"]; ?></div>
+                    <div class="area-title"><?php echo $area["name"]; ?></div>
                 </div>
                 <?php endforeach; ?>
             </div>
